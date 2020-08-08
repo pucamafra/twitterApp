@@ -1,20 +1,20 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    buildToolsVersion "30.0.0"
+    compileSdkVersion 30
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {
-        applicationId "com.marlonmafra.twitterapp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -34,30 +34,18 @@ android {
 }
 
 dependencies {
-    implementation project(":data")
-    implementation project(":domain")
     def googleDependencies = rootProject.ext.googleDependencies
-    def kotlinDependencies = rootProject.ext.kotlinDependencies
-    def squareDependencies = rootProject.ext.squareDependencies
-
-    // Google
-    implementation googleDependencies.material
-    implementation googleDependencies.coreKTX
-    implementation googleDependencies.appCompat
-    implementation googleDependencies.constraintSupport
-    implementation squareDependencies.retrofit2gson
+    def rxDependencies = rootProject.ext.rxDependencies
 
     // DAGGER 2
     implementation googleDependencies.dagger
     kapt googleDependencies.daggerCompiler
-    compileOnly googleDependencies.jsr250api
+    //compileOnly googleDependencies.jsr250api
     implementation googleDependencies.javaxInject
 
-    // Kotlin
-    implementation kotlinDependencies.kotlinStdlib
+    // RxJava
+    implementation rxDependencies.rxJava
+    implementation rxDependencies.rxAndroid
+    implementation rxDependencies.rxKotlin
 
-    // Test
-    testImplementation 'junit:junit:4.13'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }

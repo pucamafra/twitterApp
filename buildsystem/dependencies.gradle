@@ -1,0 +1,51 @@
+ext {
+    buildToolsVersion = "30.0.0"
+    minSdkVersion = 21
+    compileSdkVersion = 29
+    targetSdkVersion = 30
+    versionCode = 1
+    versionName = "1.0.0"
+    kotlin_version = "1.3.71"
+
+    // Libraries
+    materialVersion = "1.2.0"
+    coreKtxVersion = "1.3.1"
+    appCompatVersion = "1.2.0"
+    constraintLayoutVersion = "1.1.3"
+    retrofitVerson = "2.9.0"
+    okHttpVersion = "3.13.1"
+    rxJavaVersion = "2.2.1"
+    rxAndroidVersion = "2.1.0"
+    rxKotlinVersion = "2.4.0"
+    daggerVersion = "2.24"
+    jsr250ApiVersion = "1.0"
+    javaxInjectVersion = "1"
+
+    googleDependencies = [
+            material         : "com.google.android.material:material:$materialVersion",
+            coreKTX          : "androidx.core:core-ktx:$coreKtxVersion",
+            appCompat        : "androidx.appcompat:appcompat:$appCompatVersion",
+            constraintSupport: "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion",
+            dagger              : "com.google.dagger:dagger:$daggerVersion",
+            daggerCompiler      : "com.google.dagger:dagger-compiler:$daggerVersion",
+            jsr250api           : "javax.annotation:jsr250-api:$jsr250ApiVersion",
+            javaxInject         : "javax.inject:javax.inject:$javaxInjectVersion",
+    ]
+
+    kotlinDependencies = [
+            kotlinStdlib    : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
+    ]
+
+    squareDependencies = [
+            retrofit2gson         : "com.squareup.retrofit2:converter-gson:$retrofitVerson",
+            retrofit2rxjavaAdapter: "com.squareup.retrofit2:adapter-rxjava2:$retrofitVerson",
+            okhttp3               : "com.squareup.okhttp3:okhttp:$okHttpVersion",
+            okhttp3logging        : "com.squareup.okhttp3:logging-interceptor:$okHttpVersion",
+    ]
+
+    rxDependencies = [
+            rxJava   : "io.reactivex.rxjava2:rxjava:$rxJavaVersion",
+            rxAndroid: "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion",
+            rxKotlin : "io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion"
+    ]
+}
