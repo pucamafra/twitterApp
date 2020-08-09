@@ -31,6 +31,11 @@ android {
             jvmTarget = JavaVersion.VERSION_1_8
         }
     }
+
+    androidExtensions {
+        // https://kotlinlang.org/docs/tutorials/android-plugin.html#experimental-mode
+        experimental = true
+    }
 }
 
 dependencies {
@@ -39,6 +44,7 @@ dependencies {
     def googleDependencies = rootProject.ext.googleDependencies
     def kotlinDependencies = rootProject.ext.kotlinDependencies
     def squareDependencies = rootProject.ext.squareDependencies
+    def rxDependencies = rootProject.ext.rxDependencies
 
     // Google
     implementation googleDependencies.material
@@ -55,6 +61,14 @@ dependencies {
 
     // Kotlin
     implementation kotlinDependencies.kotlinStdlib
+
+    // RxJava
+    implementation rxDependencies.rxJava
+    implementation rxDependencies.rxAndroid
+    implementation rxDependencies.rxKotlin
+
+    implementation 'oauth.signpost:signpost-core:1.2.1.2'
+    implementation 'se.akerfeldt:okhttp-signpost:1.1.0'
 
     // Test
     testImplementation 'junit:junit:4.13'

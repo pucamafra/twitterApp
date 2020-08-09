@@ -34,6 +34,8 @@ android {
 }
 
 dependencies {
+    implementation project(":domain")
+
     def googleDependencies = rootProject.ext.googleDependencies
     def squareDependencies = rootProject.ext.squareDependencies
     def rxDependencies = rootProject.ext.rxDependencies
@@ -57,6 +59,9 @@ dependencies {
     implementation rxDependencies.rxJava
     implementation rxDependencies.rxAndroid
     implementation rxDependencies.rxKotlin
+
+    implementation 'oauth.signpost:signpost-core:1.2.1.2'
+    implementation 'se.akerfeldt:okhttp-signpost:1.1.0'
 
     // Test
     testImplementation 'junit:junit:4.12'
