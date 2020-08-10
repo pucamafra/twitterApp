@@ -2,7 +2,7 @@ package com.marlonmafra.twitterapp.di
 
 import com.marlonmafra.data.di.NetworkModule
 import com.marlonmafra.data.di.RepositoryModule
-import com.marlonmafra.twitterapp.MainActivity
+import com.marlonmafra.twitterapp.features.home.MainActivity
 import com.marlonmafra.twitterapp.TwitterApp
 import dagger.Component
 import javax.inject.Singleton

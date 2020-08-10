@@ -20,6 +20,11 @@ ext {
     daggerVersion = "2.24"
     jsr250ApiVersion = "1.0"
     javaxInjectVersion = "1"
+    flexibleAdapterVersion = "5.1.0"
+
+    uiDependencies = [
+            flexibleAdapter  : "com.walmartlabs:flexible-adapter:$flexibleAdapterVersion"
+    ]
 
     googleDependencies = [
             material         : "com.google.android.material:material:$materialVersion",

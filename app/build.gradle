@@ -45,6 +45,9 @@ dependencies {
     def kotlinDependencies = rootProject.ext.kotlinDependencies
     def squareDependencies = rootProject.ext.squareDependencies
     def rxDependencies = rootProject.ext.rxDependencies
+    def uiDependencies = rootProject.ext.uiDependencies
+
+    uiDependencies.flexibleAdapter
 
     // Google
     implementation googleDependencies.material
