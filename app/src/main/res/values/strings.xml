@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Twitter app</string>
     <string name="screen_name">\@%1s</string>
+    <string name="home_title">Timeline</string>
     <string name="empty"/>
     <string name="following">Following</string>
     <string name="followers">Followers</string>
