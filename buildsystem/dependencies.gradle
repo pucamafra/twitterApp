@@ -23,7 +23,7 @@ ext {
     flexibleAdapterVersion = "5.1.0"
 
     uiDependencies = [
-            flexibleAdapter  : "com.walmartlabs:flexible-adapter:$flexibleAdapterVersion"
+            flexibleAdapter: "eu.davidea:flexible-adapter:$flexibleAdapterVersion"
     ]
 
     googleDependencies = [
@@ -31,14 +31,14 @@ ext {
             coreKTX          : "androidx.core:core-ktx:$coreKtxVersion",
             appCompat        : "androidx.appcompat:appcompat:$appCompatVersion",
             constraintSupport: "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion",
-            dagger              : "com.google.dagger:dagger:$daggerVersion",
-            daggerCompiler      : "com.google.dagger:dagger-compiler:$daggerVersion",
-            jsr250api           : "javax.annotation:jsr250-api:$jsr250ApiVersion",
-            javaxInject         : "javax.inject:javax.inject:$javaxInjectVersion",
+            dagger           : "com.google.dagger:dagger:$daggerVersion",
+            daggerCompiler   : "com.google.dagger:dagger-compiler:$daggerVersion",
+            jsr250api        : "javax.annotation:jsr250-api:$jsr250ApiVersion",
+            javaxInject      : "javax.inject:javax.inject:$javaxInjectVersion",
     ]
 
     kotlinDependencies = [
-            kotlinStdlib    : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
+            kotlinStdlib: "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
     ]
 
     squareDependencies = [

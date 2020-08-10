@@ -47,7 +47,7 @@ dependencies {
     def rxDependencies = rootProject.ext.rxDependencies
     def uiDependencies = rootProject.ext.uiDependencies
 
-    uiDependencies.flexibleAdapter
+    implementation uiDependencies.flexibleAdapter
 
     // Google
     implementation googleDependencies.material
