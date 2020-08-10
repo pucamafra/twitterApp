@@ -4,7 +4,7 @@
         <domain includeSubdomains="false">10.0.2.2</domain>
         <domain includeSubdomains="true">cdcprod6.prod.walmart.com</domain>
     </domain-config>
-    <base-config cleartextTrafficPermitted="false" />
+    <base-config cleartextTrafficPermitted="true" />
     <debug-overrides>
         <trust-anchors>
             <!-- Trust user added CAs while debuggable only -->

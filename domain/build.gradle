@@ -36,12 +36,15 @@ android {
 dependencies {
     def googleDependencies = rootProject.ext.googleDependencies
     def rxDependencies = rootProject.ext.rxDependencies
+    def squareDependencies = rootProject.ext.squareDependencies
 
     // DAGGER 2
     implementation googleDependencies.dagger
     kapt googleDependencies.daggerCompiler
     //compileOnly googleDependencies.jsr250api
     implementation googleDependencies.javaxInject
+
+    implementation squareDependencies.retrofit2gson
 
     // RxJava
     implementation rxDependencies.rxJava

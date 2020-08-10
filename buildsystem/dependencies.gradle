@@ -21,6 +21,7 @@ ext {
     jsr250ApiVersion = "1.0"
     javaxInjectVersion = "1"
     flexibleAdapterVersion = "5.1.0"
+    picassoVersion = "2.71828"
 
     uiDependencies = [
             flexibleAdapter: "eu.davidea:flexible-adapter:$flexibleAdapterVersion"
@@ -42,6 +43,7 @@ ext {
     ]
 
     squareDependencies = [
+            picasso               : "com.squareup.picasso:picasso:$picassoVersion",
             retrofit2gson         : "com.squareup.retrofit2:converter-gson:$retrofitVerson",
             retrofit2rxjavaAdapter: "com.squareup.retrofit2:adapter-rxjava2:$retrofitVerson",
             okhttp3               : "com.squareup.okhttp3:okhttp:$okHttpVersion",

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--================ Margins ===================-->
+    <dimen name="default_padding_margin">8dp</dimen>
+    <dimen name="default_padding_margin_h">12dp</dimen>
+    <dimen name="default_padding_margin_x">16dp</dimen>
+    <dimen name="default_padding_margin_xh">20dp</dimen>
+    <dimen name="default_padding_margin_xx">24dp</dimen>
+    <dimen name="default_padding_margin_xxh">28dp</dimen>
+    <dimen name="default_padding_margin_xxx">32dp</dimen>
+    <dimen name="default_padding_margin_xxxh">36dp</dimen>
+    <dimen name="default_padding_margin_xxxx">40dp</dimen>
+    <dimen name="default_padding_margin_xxxxh">44dp</dimen>
+
+    <!--============== Tweet list item =============-->
+    <dimen name="tweet_profile_picture_size">50dp</dimen>
+    <dimen name="username_text_size">18sp</dimen>
+    <dimen name="screen_name_text_size">16sp</dimen>
+    <dimen name="tweet_text_size">16sp</dimen>
+</resources>

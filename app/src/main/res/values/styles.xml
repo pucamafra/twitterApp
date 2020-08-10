@@ -1,10 +1,28 @@
 <resources>
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="username" parent="Widget.AppCompat.TextView">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/username_text_size</item>
+    </style>
+
+    <style name="screenName" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">@dimen/screen_name_text_size</item>
+        <item name="android:textColor">@color/blue</item>
+    </style>
+
+    <style name="tweet" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">@dimen/tweet_text_size</item>
+    </style>
+
+    <style name="profile" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
     </style>
 
 </resources>

@@ -1,7 +1,9 @@
 package com.marlonmafra.twitterapp.features.home
 
 import androidx.lifecycle.Lifecycle
+import com.marlonmafra.domain.model.Tweet
 import com.marlonmafra.twitterapp.features.LifecyclePresenter
+import com.marlonmafra.twitterapp.features.home.ui.TweetItemList
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
@@ -10,76 +12,27 @@ class MainPresenter @Inject constructor(
     private val interactor: MainInteractor
 ) : LifecyclePresenter<IMainView>() {
 
-    private var requestToken: String = ""
-
     override fun attachView(view: IMainView, lifecycle: Lifecycle) {
         super.attachView(view, lifecycle)
         timeLine()
     }
 
-    /*fun authenticate() {
-        interactor.requestToken()
+    private fun timeLine() {
+        interactor.fetchHomeTimeline()
+            .doOnSubscribe { view?.changeProgressBarVisibility(show = true) }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
-            .map {
-                println(it)
-                it
-            }
+            .doAfterTerminate { view?.changeProgressBarVisibility(show = false) }
             .subscribe({
-                println(it)
-                // val split = it.string().split('&')
-                // val requestToken = split.get(0).removePrefix("oauth_token=")
-                requestToken = it.oauthToken
-                //openCallbackURL(requestToken)
-                view?.openCallBack(requestToken)
+                handleSuccess(it)
             }, {
                 println(it)
             })
             .autoDisposable()
     }
 
-    fun requestAccessToken(
-        oauthVerifier: String
-    ) {
-        interactor.requestAccessToken(oauthVerifier, requestToken)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
-            .map {
-                println(it)
-                val oauthToken = it.oauthToken
-                val requestTokenSecret = it.oauthTokenSecret
-
-                Test.oauthToken = oauthToken
-                Test.oauthTokenSecret = requestTokenSecret
-
-                it
-            }
-            .flatMap {
-                interactor.fetchHomeTimeline()
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.io())
-            }
-            .subscribe({
-                println(it)
-            }, {
-                println(it)
-            })
-            .autoDisposable()
-    }*/
-
-    fun timeLine() {
-        interactor.fetchHomeTimeline()
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
-            .map {
-                println(it)
-                it
-            }
-            .subscribe({
-                println(it)
-            }, {
-                println(it)
-            })
-            .autoDisposable()
+    private fun handleSuccess(tweetList: List<Tweet>) {
+        val items = tweetList.map { TweetItemList(it) }
+        view?.showTweetList(items)
     }
 }

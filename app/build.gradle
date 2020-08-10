@@ -55,6 +55,7 @@ dependencies {
     implementation googleDependencies.appCompat
     implementation googleDependencies.constraintSupport
     implementation squareDependencies.retrofit2gson
+    implementation squareDependencies.picasso
 
     // DAGGER 2
     implementation googleDependencies.dagger

@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.marlonmafra.twitterapp.R
 import com.marlonmafra.twitterapp.TwitterApp
 import com.marlonmafra.twitterapp.features.home.MainActivity
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_login.*
 import javax.inject.Inject
 
 class LoginActivity : AppCompatActivity(), ILoginView {

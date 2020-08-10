@@ -42,7 +42,7 @@ class NetworkModule(
 
     @Singleton
     @Provides
-    fun provideGson(): Gson = GsonBuilder().create()
+    fun provideGson(): Gson = GsonBuilder().setDateFormat("E MMM dd HH:mm:ss +0000 yyyy").create()
 
     // REST
     @Singleton
