@@ -13,7 +13,7 @@ abstract class LifecyclePresenter<View> : LifecycleObserver {
 
     private val compositeDisposable = CompositeDisposable()
 
-    fun attachView(view: View, lifecycle: Lifecycle) {
+    open fun attachView(view: View, lifecycle: Lifecycle) {
         this.view = view
         lifecycle.addObserver(this)
     }

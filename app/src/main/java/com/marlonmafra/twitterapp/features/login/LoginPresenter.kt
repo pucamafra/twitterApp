@@ -1,23 +1,18 @@
-package com.marlonmafra.twitterapp.features.home
+package com.marlonmafra.twitterapp.features.login
 
-import androidx.lifecycle.Lifecycle
+import com.marlonmafra.data.di.Test
 import com.marlonmafra.twitterapp.features.LifecyclePresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class MainPresenter @Inject constructor(
-    private val interactor: MainInteractor
-) : LifecyclePresenter<IMainView>() {
+class LoginPresenter @Inject constructor(
+    private val interactor: LoginInteractor
+) : LifecyclePresenter<ILoginView>() {
 
     private var requestToken: String = ""
 
-    override fun attachView(view: IMainView, lifecycle: Lifecycle) {
-        super.attachView(view, lifecycle)
-        timeLine()
-    }
-
-    /*fun authenticate() {
+    fun authenticate() {
         interactor.requestToken()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
@@ -38,9 +33,7 @@ class MainPresenter @Inject constructor(
             .autoDisposable()
     }
 
-    fun requestAccessToken(
-        oauthVerifier: String
-    ) {
+    fun requestAccessToken(oauthVerifier: String) {
         interactor.requestAccessToken(oauthVerifier, requestToken)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
@@ -54,29 +47,9 @@ class MainPresenter @Inject constructor(
 
                 it
             }
-            .flatMap {
-                interactor.fetchHomeTimeline()
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.io())
-            }
             .subscribe({
                 println(it)
-            }, {
-                println(it)
-            })
-            .autoDisposable()
-    }*/
-
-    fun timeLine() {
-        interactor.fetchHomeTimeline()
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
-            .map {
-                println(it)
-                it
-            }
-            .subscribe({
-                println(it)
+                view?.userLogged()
             }, {
                 println(it)
             })

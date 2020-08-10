@@ -1,7 +1,8 @@
 package com.marlonmafra.twitterapp.features.home
 
+import eu.davidea.flexibleadapter.items.AbstractFlexibleItem
+
 interface IMainView {
 
-    fun openCallBack(oauthToken:String)
-
+    fun showTweetList(items: List<AbstractFlexibleItem<*>>)
 }
