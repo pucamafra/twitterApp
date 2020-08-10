@@ -1,7 +1,7 @@
 package com.marlonmafra.data.di
 
-import com.marlonmafra.data.repository.news.AuthenticationRepository
-import com.marlonmafra.data.repository.news.remote.AuthenticationRemoteDataSource
+import com.marlonmafra.data.repository.authentication.AuthenticationRepository
+import com.marlonmafra.data.repository.authentication.remote.AuthenticationRemoteDataSource
 import com.marlonmafra.domain.repository.IAuthenticationDataSource
 import dagger.Module
 import dagger.Provides

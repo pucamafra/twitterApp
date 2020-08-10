@@ -1,4 +1,4 @@
-package com.marlonmafra.data.repository.news.remote
+package com.marlonmafra.data.repository.authentication.remote
 
 import com.marlonmafra.data.rest.UnauthenticatedService
 import com.marlonmafra.domain.model.RequestAccessTokenResponse

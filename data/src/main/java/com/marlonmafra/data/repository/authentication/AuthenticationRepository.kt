@@ -1,6 +1,6 @@
-package com.marlonmafra.data.repository.news
+package com.marlonmafra.data.repository.authentication
 
-import com.marlonmafra.data.repository.news.remote.AuthenticationRemoteDataSource
+import com.marlonmafra.data.repository.authentication.remote.AuthenticationRemoteDataSource
 import com.marlonmafra.domain.model.RequestAccessTokenResponse
 import com.marlonmafra.domain.model.RequestTokenResponse
 import com.marlonmafra.domain.repository.IAuthenticationDataSource

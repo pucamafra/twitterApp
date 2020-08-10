@@ -1,6 +1,6 @@
 package com.marlonmafra.twitterapp.features.home
 
-import com.marlonmafra.data.repository.news.AuthenticationRepository
+import com.marlonmafra.data.repository.authentication.AuthenticationRepository
 import com.marlonmafra.data.repository.twitter.TwitterRepository
 import com.marlonmafra.domain.model.RequestAccessTokenResponse
 import com.marlonmafra.domain.model.RequestTokenResponse
