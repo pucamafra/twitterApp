@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/username"
+                style="@style/usernameProfile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_padding_margin_x"
+                android:layout_marginTop="@dimen/default_padding_margin_xxxx"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Chuck Norris" />
+
+            <TextView
+                android:id="@+id/screenName"
+                style="@style/screenNameProfile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/username"
+                app:layout_constraintTop_toBottomOf="@+id/username"
+                tools:text="Description Text" />
+
+            <TextView
+                android:id="@+id/userDescription"
+                style="@style/userDescriptionProfile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_padding_margin"
+                android:layout_marginEnd="@dimen/default_padding_margin_x"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/screenName"
+                app:layout_constraintTop_toBottomOf="@+id/screenName"
+                tools:text="🇧🇷 | 19 " />
+
+            <TextView
+                android:id="@+id/location"
+                style="@style/locationProfile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_padding_margin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/userDescription"
+                app:layout_constraintTop_toBottomOf="@+id/userDescription"
+                tools:text="Florianopolis, Brasil" />
+
+            <TextView
+                android:id="@+id/joined"
+                style="@style/joinedProfile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_padding_margin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/location"
+                app:layout_constraintTop_toBottomOf="@+id/location"
+                tools:text="Joined April 2009" />
+
+            <com.marlonmafra.twitterapp.ui.profileDetailsView.ProfileDetailsView
+                android:id="@+id/followingView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_padding_margin"
+                app:details_label="@string/following"
+                app:layout_constraintStart_toStartOf="@id/joined"
+                app:layout_constraintTop_toBottomOf="@+id/joined" />
+
+            <com.marlonmafra.twitterapp.ui.profileDetailsView.ProfileDetailsView
+                android:id="@+id/followerView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_padding_margin_h"
+                app:details_label="@string/followers"
+                app:layout_constraintStart_toEndOf="@+id/followingView"
+                app:layout_constraintTop_toTopOf="@+id/followingView" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:fitsSystemWindows="true">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:fitsSystemWindows="true"
+            app:expandedTitleGravity="top"
+            app:expandedTitleMarginStart="100dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:toolbarId="@id/toolbar">
+
+            <ImageView
+                android:id="@+id/header"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                android:scaleType="centerCrop"
+                app:layout_collapseMode="parallax" />
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:navigationIcon="@drawable/ic_arrow_back"
+                app:subtitleTextColor="@color/blue"
+                app:titleTextColor="@android:color/white" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/userPicture"
+        android:layout_width="@dimen/profile_picture_size"
+        android:layout_height="@dimen/profile_picture_size"
+        android:layout_marginStart="@dimen/default_padding_margin_x"
+        android:padding="2dp"
+        android:scaleType="centerCrop"
+        app:layout_anchor="@id/appBar"
+        app:layout_anchorGravity="bottom|start"
+        app:shapeAppearance="@style/profilePicture"
+        app:strokeColor="@android:color/white"
+        app:strokeWidth="4dp" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

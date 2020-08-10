@@ -4,13 +4,16 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.marlonmafra.domain.model.User
 import com.marlonmafra.twitterapp.R
 import com.marlonmafra.twitterapp.TwitterApp
 import com.marlonmafra.twitterapp.extension.changeVisibility
+import com.marlonmafra.twitterapp.features.profile.ProfileActivity
 import eu.davidea.flexibleadapter.FlexibleAdapter
 import eu.davidea.flexibleadapter.items.AbstractFlexibleItem
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.loading_progress_bar.*
+import kotlinx.android.synthetic.main.toolbar.toolbar
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), IMainView {
@@ -34,6 +37,7 @@ class MainActivity : AppCompatActivity(), IMainView {
         tweetListView.layoutManager = layoutManager
         tweetListView.addItemDecoration(dividerItemDecoration)
         tweetListView.adapter = adapter
+        setSupportActionBar(toolbar)
     }
 
     override fun showTweetList(items: List<AbstractFlexibleItem<*>>) {
@@ -42,5 +46,9 @@ class MainActivity : AppCompatActivity(), IMainView {
 
     override fun changeProgressBarVisibility(show: Boolean) {
         loadingProgressBar.changeVisibility(show)
+    }
+
+    override fun goToProfileScreen(user: User) {
+        startActivity(ProfileActivity.createInstance(this, user))
     }
 }

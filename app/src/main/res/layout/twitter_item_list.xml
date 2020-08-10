@@ -9,18 +9,18 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/userPicture"
-        android:layout_width="@dimen/tweet_profile_picture_size"
-        android:layout_height="@dimen/tweet_profile_picture_size"
+        android:layout_width="@dimen/profile_picture_item_list_size"
+        android:layout_height="@dimen/profile_picture_item_list_size"
         android:layout_marginStart="@dimen/default_padding_margin_x"
         android:layout_marginTop="@dimen/default_padding_margin_x"
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearance="@style/profile" />
+        app:shapeAppearance="@style/profileItemList" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/userId"
-        style="@style/screenName"
+        style="@style/screenNameItemList"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/default_padding_margin"
@@ -35,7 +35,7 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tweetText"
-        style="@style/tweet"
+        style="@style/tweetItemList"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/default_padding_margin_x"
@@ -46,7 +46,7 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/username"
-        style="@style/username"
+        style="@style/usernameItemList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/default_padding_margin"

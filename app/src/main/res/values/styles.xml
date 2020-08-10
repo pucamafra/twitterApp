@@ -1,28 +1,68 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="username" parent="Widget.AppCompat.TextView">
+    <style name="usernameItemList" parent="Widget.AppCompat.TextView">
         <item name="android:textStyle">bold</item>
-        <item name="android:textSize">@dimen/username_text_size</item>
+        <item name="android:textSize">@dimen/username_item_list_text_size</item>
+        <item name="android:textColor">@android:color/black</item>
     </style>
 
-    <style name="screenName" parent="Widget.AppCompat.TextView">
-        <item name="android:textSize">@dimen/screen_name_text_size</item>
+    <style name="screenNameItemList" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">@dimen/screen_name_item_list_text_size</item>
         <item name="android:textColor">@color/blue</item>
     </style>
 
-    <style name="tweet" parent="Widget.AppCompat.TextView">
-        <item name="android:textSize">@dimen/tweet_text_size</item>
+    <style name="tweetItemList" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">@dimen/tweet_item_list_text_size</item>
     </style>
 
-    <style name="profile" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+    <style name="profileItemList" parent="ShapeAppearance.MaterialComponents.MediumComponent">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
+
+    <style name="profilePicture" parent="Widget.MaterialComponents.ShapeableImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="usernameProfile" parent="Widget.AppCompat.TextView">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/md_text_size_headline_5_regular</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="screenNameProfile" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">@dimen/md_text_size_subtitle_1_regular</item>
+    </style>
+
+    <style name="userDescriptionProfile" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">@dimen/md_text_size_subtitle_1_regular</item>
+    </style>
+
+    <style name="locationProfile" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">@dimen/md_text_size_subtitle_1_regular</item>
+        <item name="android:textColor">@color/blue</item>
+    </style>
+
+    <style name="joinedProfile" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">@dimen/md_text_size_subtitle_1_regular</item>
+    </style>
+
+    <style name="profileDetailsViewValue" parent="Widget.AppCompat.TextView">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/md_text_size_subtitle_1_regular</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="profileDetailsViewLabel" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">@dimen/md_text_size_subtitle_1_regular</item>
+    </style>
+
 
 </resources>

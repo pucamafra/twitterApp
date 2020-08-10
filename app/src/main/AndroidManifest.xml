@@ -11,15 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity android:name=".features.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-
             </intent-filter>
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -30,7 +27,6 @@
                     android:host="twitter/app"
                     android:scheme="https" />
             </intent-filter>
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -41,7 +37,6 @@
                     android:host="minhaufsc.oauth.ufsc.br"
                     android:scheme="https" />
             </intent-filter>
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -52,10 +47,11 @@
                     android:host="twitter/app"
                     android:scheme="https" />
             </intent-filter>
-
         </activity>
-
         <activity android:name=".features.home.MainActivity" />
+        <activity
+            android:name=".features.profile.ProfileActivity"
+            android:label="@string/empty" />
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
