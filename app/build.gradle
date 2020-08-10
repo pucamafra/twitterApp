@@ -55,6 +55,7 @@ dependencies {
     implementation googleDependencies.appCompat
     implementation googleDependencies.constraintSupport
     implementation googleDependencies.swipeRefreshLayout
+    implementation googleDependencies.securityCrypto
 
     // Square
     implementation squareDependencies.retrofit2gson

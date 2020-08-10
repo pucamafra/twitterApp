@@ -1,6 +1,7 @@
 package com.marlonmafra.data.repository.authentication.local
 
 import android.content.Context
+import androidx.core.content.edit
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import javax.inject.Inject
@@ -26,10 +27,9 @@ class AuthenticationLocalData @Inject constructor(
     )
 
     fun saveData(oathToken: String, oathTokenSecret: String) {
-        sharedPreferences.edit().apply {
+        sharedPreferences.edit {
             putString(TOKEN, oathToken)
             putString(TOKEN_SECRET, oathTokenSecret)
-            apply()
         }
     }
 

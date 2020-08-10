@@ -42,13 +42,15 @@ dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-    // Google
+    // Square
     implementation squareDependencies.retrofit2gson
     implementation squareDependencies.retrofit2rxjavaAdapter
     implementation squareDependencies.okhttp3
     implementation squareDependencies.okhttp3logging
 
-    implementation "androidx.security:security-crypto:1.1.0-alpha02"
+    // Google
+    implementation googleDependencies.securityCrypto
+    implementation googleDependencies.coreKTX
 
     // DAGGER 2
     implementation googleDependencies.dagger
