@@ -54,6 +54,9 @@ dependencies {
     implementation googleDependencies.coreKTX
     implementation googleDependencies.appCompat
     implementation googleDependencies.constraintSupport
+    implementation googleDependencies.swipeRefreshLayout
+
+    // Square
     implementation squareDependencies.retrofit2gson
     implementation squareDependencies.picasso
 

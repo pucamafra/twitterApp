@@ -10,4 +10,6 @@ interface IMainView {
     fun changeProgressBarVisibility(show: Boolean)
 
     fun goToProfileScreen(user: User)
+
+    fun hideRefreshingView()
 }

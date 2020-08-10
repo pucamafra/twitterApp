@@ -38,6 +38,9 @@ class MainActivity : AppCompatActivity(), IMainView {
         tweetListView.addItemDecoration(dividerItemDecoration)
         tweetListView.adapter = adapter
         setSupportActionBar(toolbar)
+        swipeRefreshLayout.setOnRefreshListener {
+            presenter.retrieveTimeLine()
+        }
     }
 
     override fun showTweetList(items: List<AbstractFlexibleItem<*>>) {
@@ -46,6 +49,10 @@ class MainActivity : AppCompatActivity(), IMainView {
 
     override fun changeProgressBarVisibility(show: Boolean) {
         loadingProgressBar.changeVisibility(show)
+    }
+
+    override fun hideRefreshingView() {
+        swipeRefreshLayout.isRefreshing = false
     }
 
     override fun goToProfileScreen(user: User) {

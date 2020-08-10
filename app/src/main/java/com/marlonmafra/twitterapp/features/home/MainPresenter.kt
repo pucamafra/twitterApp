@@ -19,7 +19,7 @@ class MainPresenter @Inject constructor(
     override fun attachView(view: IMainView, lifecycle: Lifecycle) {
         super.attachView(view, lifecycle)
         setupObserver()
-        timeLine()
+        retrieveTimeLine()
     }
 
     private fun setupObserver() {
@@ -32,12 +32,15 @@ class MainPresenter @Inject constructor(
             .autoDisposable()
     }
 
-    private fun timeLine() {
+    fun retrieveTimeLine() {
         interactor.fetchHomeTimeline()
+            .subscribeOn(Schedulers.io())
             .doOnSubscribe { view?.changeProgressBarVisibility(show = true) }
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
-            .doAfterTerminate { view?.changeProgressBarVisibility(show = false) }
+            .doAfterTerminate {
+                view?.changeProgressBarVisibility(show = false)
+                view?.hideRefreshingView()
+            }
             .subscribe({
                 handleSuccess(it)
             }, {
