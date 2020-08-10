@@ -1,6 +1,6 @@
 package com.marlonmafra.data.rest
 
-import com.marlonmafra.data.di.Test
+import com.marlonmafra.data.repository.authentication.local.AuthenticationLocalData
 import oauth.signpost.exception.OAuthException
 import okhttp3.Interceptor
 import okhttp3.Request
@@ -11,13 +11,14 @@ import javax.inject.Inject
 
 class AuthInterceptor @Inject constructor(
     private val consumerKey: String,
-    private val consumerSecret: String
+    private val consumerSecret: String,
+    private val authenticationLocalData: AuthenticationLocalData
 ) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val request: Request = chain.request()
-        val accessToken = Test.oauthToken
-        val accessTokenSecret = Test.oauthTokenSecret
+        val accessToken = authenticationLocalData.getToken()
+        val accessTokenSecret = authenticationLocalData.getTokenSecret()
 
         val consumer = OkHttpOAuthConsumer(consumerKey, consumerSecret)
         consumer.setTokenWithSecret(accessToken, accessTokenSecret)

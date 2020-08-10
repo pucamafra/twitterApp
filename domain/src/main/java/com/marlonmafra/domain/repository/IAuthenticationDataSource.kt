@@ -12,4 +12,6 @@ interface IAuthenticationDataSource {
         oauthVerifier: String,
         requestToken: String
     ): Single<RequestAccessTokenResponse>
+
+    fun isAuthenticated(): Boolean
 }

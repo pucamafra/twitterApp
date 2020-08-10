@@ -40,7 +40,6 @@ dependencies {
     def squareDependencies = rootProject.ext.squareDependencies
     def rxDependencies = rootProject.ext.rxDependencies
 
-    implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     // Google
@@ -48,6 +47,8 @@ dependencies {
     implementation squareDependencies.retrofit2rxjavaAdapter
     implementation squareDependencies.okhttp3
     implementation squareDependencies.okhttp3logging
+
+    implementation "androidx.security:security-crypto:1.1.0-alpha02"
 
     // DAGGER 2
     implementation googleDependencies.dagger

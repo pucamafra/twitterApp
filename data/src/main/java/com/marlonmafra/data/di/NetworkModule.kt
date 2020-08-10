@@ -5,6 +5,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.marlonmafra.data.BuildConfig
 import com.marlonmafra.data.R
+import com.marlonmafra.data.repository.authentication.local.AuthenticationLocalData
 import com.marlonmafra.data.rest.ApiService
 import com.marlonmafra.data.rest.AuthInterceptor
 import com.marlonmafra.data.rest.UnauthInterceptor
@@ -88,8 +89,8 @@ class NetworkModule(
 
     @Singleton
     @Provides
-    fun provideAuthInterceptor(): AuthInterceptor {
-        return AuthInterceptor(consumerKey, consumerSecret)
+    fun provideAuthInterceptor(authenticationLocalData: AuthenticationLocalData): AuthInterceptor {
+        return AuthInterceptor(consumerKey, consumerSecret, authenticationLocalData)
     }
 
     @Singleton

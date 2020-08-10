@@ -1,6 +1,6 @@
 package com.marlonmafra.twitterapp.features.login
 
-import com.marlonmafra.data.di.Test
+import androidx.lifecycle.Lifecycle
 import com.marlonmafra.twitterapp.features.LifecyclePresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -12,6 +12,17 @@ class LoginPresenter @Inject constructor(
 
     private var requestToken: String = ""
 
+    override fun attachView(view: ILoginView, lifecycle: Lifecycle) {
+        super.attachView(view, lifecycle)
+        checkAuth()
+    }
+
+    private fun checkAuth() {
+        if (interactor.isAuthenticated()) {
+            view?.userLogged()
+        }
+    }
+
     fun authenticate() {
         interactor.requestToken()
             .observeOn(AndroidSchedulers.mainThread())
@@ -22,10 +33,7 @@ class LoginPresenter @Inject constructor(
             }
             .subscribe({
                 println(it)
-                // val split = it.string().split('&')
-                // val requestToken = split.get(0).removePrefix("oauth_token=")
                 requestToken = it.oauthToken
-                //openCallbackURL(requestToken)
                 view?.openCallBack(requestToken)
             }, {
                 println(it)
@@ -37,16 +45,6 @@ class LoginPresenter @Inject constructor(
         interactor.requestAccessToken(oauthVerifier, requestToken)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
-            .map {
-                println(it)
-                val oauthToken = it.oauthToken
-                val requestTokenSecret = it.oauthTokenSecret
-
-                Test.oauthToken = oauthToken
-                Test.oauthTokenSecret = requestTokenSecret
-
-                it
-            }
             .subscribe({
                 println(it)
                 view?.userLogged()
