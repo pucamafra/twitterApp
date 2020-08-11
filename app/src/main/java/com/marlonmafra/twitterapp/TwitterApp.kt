@@ -24,6 +24,5 @@ class TwitterApp : Application() {
             .networkModule(NetworkModule(applicationContext))
             .repositoryModule(RepositoryModule())
             .build()
-        component?.inject(this)
     }
 }
