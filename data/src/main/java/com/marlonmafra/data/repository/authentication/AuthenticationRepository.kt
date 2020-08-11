@@ -1,7 +1,7 @@
 package com.marlonmafra.data.repository.authentication
 
-import com.marlonmafra.data.repository.authentication.local.AuthenticationLocalData
-import com.marlonmafra.data.repository.authentication.remote.AuthenticationRemoteDataSource
+import com.marlonmafra.data.repository.authentication.local.IAuthenticationLocalDataSource
+import com.marlonmafra.data.repository.authentication.remote.IAuthenticationRemoteDataSource
 import com.marlonmafra.domain.model.RequestAccessTokenResponse
 import com.marlonmafra.domain.model.RequestTokenResponse
 import com.marlonmafra.domain.repository.IAuthenticationDataSource
@@ -9,8 +9,8 @@ import io.reactivex.Single
 import javax.inject.Inject
 
 class AuthenticationRepository @Inject constructor(
-    private val local: AuthenticationLocalData,
-    private val remote: AuthenticationRemoteDataSource
+    private val local: IAuthenticationLocalDataSource,
+    private val remote: IAuthenticationRemoteDataSource
 ) : IAuthenticationDataSource {
 
     override fun requestToken(): Single<RequestTokenResponse> {

@@ -12,7 +12,7 @@ const val TOKEN_SECRET = "TOKEN_SECRET"
 
 class AuthenticationLocalData @Inject constructor(
     context: Context
-) {
+) : IAuthenticationLocalDataSource {
 
     private val masterKey = MasterKey.Builder(context)
         .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
@@ -26,18 +26,18 @@ class AuthenticationLocalData @Inject constructor(
         EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
     )
 
-    fun saveData(oathToken: String, oathTokenSecret: String) {
+    override fun saveData(oathToken: String, oathTokenSecret: String) {
         sharedPreferences.edit {
             putString(TOKEN, oathToken)
             putString(TOKEN_SECRET, oathTokenSecret)
         }
     }
 
-    fun getToken(): String? {
+    override fun getToken(): String? {
         return sharedPreferences.getString(TOKEN, null)
     }
 
-    fun getTokenSecret(): String? {
+    override fun getTokenSecret(): String? {
         return sharedPreferences.getString(TOKEN_SECRET, null)
     }
 }
