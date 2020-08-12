@@ -15,7 +15,7 @@ class SplashPresenter @Inject constructor(
 
     private fun handleSuccess(logged: Boolean) {
         if (logged) {
-            view?.userLogged()
+            view?.goToHome()
         } else {
             view?.goToLogin()
         }

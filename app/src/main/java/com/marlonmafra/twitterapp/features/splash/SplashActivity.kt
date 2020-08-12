@@ -21,7 +21,7 @@ class SplashActivity : AppCompatActivity(), ISplashView {
         presenter.checkAuthentication()
     }
 
-    override fun userLogged() {
+    override fun goToHome() {
         startActivity(MainActivity.createInstance(this))
     }
 
