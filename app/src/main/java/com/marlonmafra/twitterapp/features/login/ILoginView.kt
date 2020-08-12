@@ -4,6 +4,6 @@ interface ILoginView {
 
     fun openCallBack(oauthToken:String)
 
-    fun userLogged()
+    fun goToHome()
 
 }

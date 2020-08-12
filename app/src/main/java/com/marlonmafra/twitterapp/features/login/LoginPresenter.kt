@@ -1,6 +1,5 @@
 package com.marlonmafra.twitterapp.features.login
 
-import androidx.lifecycle.Lifecycle
 import com.marlonmafra.twitterapp.features.LifecyclePresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -12,27 +11,11 @@ class LoginPresenter @Inject constructor(
 
     private var requestToken: String = ""
 
-    override fun attachView(view: ILoginView, lifecycle: Lifecycle) {
-        super.attachView(view, lifecycle)
-        checkAuth()
-    }
-
-    private fun checkAuth() {
-        if (interactor.isAuthenticated()) {
-            view?.userLogged()
-        }
-    }
-
     fun authenticate() {
         interactor.requestToken()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
-            .map {
-                println(it)
-                it
-            }
             .subscribe({
-                println(it)
                 requestToken = it.oauthToken
                 view?.openCallBack(requestToken)
             }, {
@@ -46,8 +29,7 @@ class LoginPresenter @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .subscribe({
-                println(it)
-                view?.userLogged()
+                view?.goToHome()
             }, {
                 println(it)
             })

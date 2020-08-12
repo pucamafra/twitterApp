@@ -1,5 +1,6 @@
 package com.marlonmafra.twitterapp.features.login
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -11,6 +12,10 @@ import kotlinx.android.synthetic.main.activity_login.*
 import javax.inject.Inject
 
 class LoginActivity : AppCompatActivity(), ILoginView {
+
+    companion object {
+        fun createInstance(context: Context): Intent = Intent(context, LoginActivity::class.java)
+    }
 
     @Inject
     lateinit var presenter: LoginPresenter
@@ -31,7 +36,7 @@ class LoginActivity : AppCompatActivity(), ILoginView {
         }
     }
 
-    override fun userLogged() {
+    override fun goToHome() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }

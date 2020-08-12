@@ -1,5 +1,7 @@
 package com.marlonmafra.twitterapp.features.home
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -18,6 +20,10 @@ import kotlinx.android.synthetic.main.toolbar.toolbar
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), IMainView {
+
+    companion object {
+        fun createInstance(context: Context): Intent = Intent(context, MainActivity::class.java)
+    }
 
     @Inject
     lateinit var presenter: MainPresenter

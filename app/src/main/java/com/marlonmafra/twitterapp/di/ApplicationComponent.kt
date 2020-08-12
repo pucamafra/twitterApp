@@ -6,6 +6,7 @@ import com.marlonmafra.twitterapp.TwitterApp
 import com.marlonmafra.twitterapp.features.home.MainActivity
 import com.marlonmafra.twitterapp.features.login.LoginActivity
 import com.marlonmafra.twitterapp.features.profile.ProfileActivity
+import com.marlonmafra.twitterapp.features.splash.SplashActivity
 import dagger.Component
 import javax.inject.Singleton
 
@@ -19,4 +20,6 @@ interface ApplicationComponent {
     fun inject(loginActivity: LoginActivity)
 
     fun inject(profileActivity: ProfileActivity)
+
+    fun inject(splashActivity: SplashActivity)
 }

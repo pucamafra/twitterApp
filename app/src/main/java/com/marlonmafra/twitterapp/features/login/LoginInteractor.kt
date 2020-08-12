@@ -20,8 +20,4 @@ class LoginInteractor @Inject constructor(
     ): Single<RequestAccessTokenResponse> {
         return authenticationRepository.requestAccessToken(oauthVerifier, requestToken)
     }
-
-    fun isAuthenticated(): Boolean {
-        return authenticationRepository.isAuthenticated()
-    }
 }
