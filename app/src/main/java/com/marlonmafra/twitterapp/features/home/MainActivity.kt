@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.marlonmafra.domain.model.User
 import com.marlonmafra.twitterapp.R
 import com.marlonmafra.twitterapp.TwitterApp
@@ -29,6 +30,7 @@ class MainActivity : AppCompatActivity(), IMainView {
         TwitterApp.component?.inject(this)
         setupLayout()
         presenter.attachView(this, lifecycle)
+        presenter.retrieveTimeLine()
     }
 
     private fun setupLayout() {
@@ -57,5 +59,10 @@ class MainActivity : AppCompatActivity(), IMainView {
 
     override fun goToProfileScreen(user: User) {
         startActivity(ProfileActivity.createInstance(this, user))
+    }
+
+    override fun onRetrieveTweetError() {
+        Snackbar.make(swipeRefreshLayout, R.string.something_went_wrong, Snackbar.LENGTH_LONG)
+            .show()
     }
 }

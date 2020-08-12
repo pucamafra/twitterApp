@@ -16,10 +16,10 @@ import org.junit.Before
 class TwitterRepositoryTest {
 
     @InjectMockKs
-    lateinit var twitterRepository: TwitterRepository
+    private lateinit var twitterRepository: TwitterRepository
 
     @MockK
-    lateinit var twitterRemoteDataSource: TwitterRemoteDataSource
+    private lateinit var twitterRemoteDataSource: TwitterRemoteDataSource
 
     @Before
     fun setup() {
@@ -44,7 +44,6 @@ class TwitterRepositoryTest {
     @Test
     fun fetchHomeTimeline_exception() {
         // Given
-        val tweetList = ArrayList<Tweet>()
         every { twitterRemoteDataSource.fetchHomeTimeline() } returns Single.error(Exception())
         val testObserver = TestObserver.create<List<Tweet>>()
 

@@ -25,6 +25,8 @@ ext {
     javaxInjectVersion = "1"
     flexibleAdapterVersion = "5.1.0"
     picassoVersion = "2.71828"
+    mockkVersion = "1.10.0"
+    junitVersion = "4.13"
 
     uiDependencies = [
             flexibleAdapter: "eu.davidea:flexible-adapter:$flexibleAdapterVersion"
@@ -59,5 +61,10 @@ ext {
             rxJava   : "io.reactivex.rxjava2:rxjava:$rxJavaVersion",
             rxAndroid: "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion",
             rxKotlin : "io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion"
+    ]
+
+    testDependencies = [
+            mockk: "io.mockk:mockk:$mockkVersion",
+            junit : "junit:junit:$junitVersion"
     ]
 }

@@ -1,6 +1,6 @@
 package com.marlonmafra.data.rest
 
-import com.marlonmafra.data.repository.authentication.local.AuthenticationLocalData
+import com.marlonmafra.data.repository.authentication.local.AuthenticationLocalDataSource
 import oauth.signpost.exception.OAuthException
 import okhttp3.Interceptor
 import okhttp3.Request
@@ -12,7 +12,7 @@ import javax.inject.Inject
 class AuthInterceptor @Inject constructor(
     private val consumerKey: String,
     private val consumerSecret: String,
-    private val authenticationLocalData: AuthenticationLocalData
+    private val authenticationLocalData: AuthenticationLocalDataSource
 ) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {

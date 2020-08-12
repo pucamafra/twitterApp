@@ -10,6 +10,6 @@ class TwitterRemoteDataSource @Inject constructor(
 ) : ITwitterRemoteDataSource {
 
     override fun fetchHomeTimeline(): Single<List<Tweet>> {
-        return apiService.userTimeline()
+        return apiService.homeTimeline()
     }
 }

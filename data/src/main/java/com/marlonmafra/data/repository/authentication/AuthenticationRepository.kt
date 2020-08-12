@@ -28,8 +28,8 @@ class AuthenticationRepository @Inject constructor(
     }
 
     override fun isAuthenticated(): Boolean {
-        val token = local.getToken() != null
-        val tokenSecret = local.getTokenSecret() != null
-        return token && tokenSecret
+        val hasToken = local.getToken() != null
+        val hasTokenSecret = local.getTokenSecret() != null
+        return hasToken && hasTokenSecret
     }
 }

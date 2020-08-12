@@ -7,5 +7,5 @@ import retrofit2.http.GET
 interface ApiService {
 
     @GET("1.1/statuses/home_timeline.json")
-    fun userTimeline(): Single<List<Tweet>>
+    fun homeTimeline(): Single<List<Tweet>>
 }

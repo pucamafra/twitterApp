@@ -39,6 +39,7 @@ dependencies {
     def googleDependencies = rootProject.ext.googleDependencies
     def squareDependencies = rootProject.ext.squareDependencies
     def rxDependencies = rootProject.ext.rxDependencies
+    def testDependencies = rootProject.ext.testDependencies
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
@@ -67,7 +68,8 @@ dependencies {
     implementation 'se.akerfeldt:okhttp-signpost:1.1.0'
 
     // Test
-    testImplementation 'junit:junit:4.12'
+    testImplementation testDependencies.mockk
+    testImplementation testDependencies.junit
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 

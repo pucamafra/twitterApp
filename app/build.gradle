@@ -13,7 +13,6 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -33,7 +32,6 @@ android {
     }
 
     androidExtensions {
-        // https://kotlinlang.org/docs/tutorials/android-plugin.html#experimental-mode
         experimental = true
     }
 }
@@ -46,6 +44,7 @@ dependencies {
     def squareDependencies = rootProject.ext.squareDependencies
     def rxDependencies = rootProject.ext.rxDependencies
     def uiDependencies = rootProject.ext.uiDependencies
+    def testDependencies = rootProject.ext.testDependencies
 
     implementation uiDependencies.flexibleAdapter
 
@@ -79,7 +78,8 @@ dependencies {
     implementation 'se.akerfeldt:okhttp-signpost:1.1.0'
 
     // Test
-    testImplementation 'junit:junit:4.13'
+    testImplementation testDependencies.mockk
+    testImplementation testDependencies.junit
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }

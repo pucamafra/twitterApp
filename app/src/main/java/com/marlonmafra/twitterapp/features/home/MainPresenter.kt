@@ -1,5 +1,6 @@
 package com.marlonmafra.twitterapp.features.home
 
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.Lifecycle
 import com.marlonmafra.domain.model.Tweet
 import com.marlonmafra.domain.model.User
@@ -14,12 +15,18 @@ class MainPresenter @Inject constructor(
     private val interactor: MainInteractor
 ) : LifecyclePresenter<IMainView>() {
 
-    private val profileClickObserver = PublishSubject.create<User>()
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    constructor(
+        interactor: MainInteractor, profileClickObserver: PublishSubject<User>
+    ) : this(interactor) {
+        this.profileClickObserver = profileClickObserver
+    }
+
+    private var profileClickObserver = PublishSubject.create<User>()
 
     override fun attachView(view: IMainView, lifecycle: Lifecycle) {
         super.attachView(view, lifecycle)
         setupObserver()
-        retrieveTimeLine()
     }
 
     private fun setupObserver() {
@@ -44,7 +51,7 @@ class MainPresenter @Inject constructor(
             .subscribe({
                 handleSuccess(it)
             }, {
-                println(it)
+                view?.onRetrieveTweetError()
             })
             .autoDisposable()
     }

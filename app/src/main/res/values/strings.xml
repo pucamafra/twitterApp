@@ -6,4 +6,5 @@
     <string name="following">Following</string>
     <string name="followers">Followers</string>
     <string name="joined">Joined %1s</string>
+    <string name="something_went_wrong">Something went wrong, please try again</string>
 </resources>

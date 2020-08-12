@@ -1,6 +1,6 @@
-package com.marlonmafra.twitterapp.features.home
+package com.marlonmafra.data.repository.twitter.remote
 
-import com.marlonmafra.data.repository.twitter.TwitterRepository
+import com.marlonmafra.data.rest.ApiService
 import com.marlonmafra.domain.model.Tweet
 import io.mockk.MockKAnnotations
 import io.mockk.every
@@ -11,13 +11,13 @@ import io.reactivex.observers.TestObserver
 import org.junit.Before
 import org.junit.Test
 
-class MainInteractorTest {
+class TwitterRemoteDataSourceTest {
 
     @InjectMockKs
-    private lateinit var interactor: MainInteractor
+    private lateinit var twitterRemoteDataSource: TwitterRemoteDataSource
 
     @MockK
-    private lateinit var twitterRepository: TwitterRepository
+    private lateinit var apiService: ApiService
 
     @Before
     fun setup() {
@@ -28,11 +28,11 @@ class MainInteractorTest {
     fun fetchHomeTimeline() {
         // Given
         val tweetList = ArrayList<Tweet>()
-        every { twitterRepository.fetchHomeTimeline() } returns Single.just(tweetList)
+        every { apiService.homeTimeline() } returns Single.just(tweetList)
         val testObserver = TestObserver.create<List<Tweet>>()
 
         // When
-        interactor.fetchHomeTimeline().subscribe(testObserver)
+        twitterRemoteDataSource.fetchHomeTimeline().subscribe(testObserver)
 
         // Then
         testObserver.assertValue(tweetList)
@@ -42,11 +42,11 @@ class MainInteractorTest {
     @Test
     fun fetchHomeTimeline_exception() {
         // Given
-        every { twitterRepository.fetchHomeTimeline() } returns Single.error(Exception())
+        every { apiService.homeTimeline() } returns Single.error(Exception())
         val testObserver = TestObserver.create<List<Tweet>>()
 
         // When
-        interactor.fetchHomeTimeline().subscribe(testObserver)
+        twitterRemoteDataSource.fetchHomeTimeline().subscribe(testObserver)
 
         // Then
         testObserver.assertError(Exception::class.java)

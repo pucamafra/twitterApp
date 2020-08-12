@@ -12,4 +12,6 @@ interface IMainView {
     fun goToProfileScreen(user: User)
 
     fun hideRefreshingView()
+
+    fun onRetrieveTweetError()
 }

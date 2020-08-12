@@ -8,11 +8,6 @@ import retrofit2.http.Query
 
 interface UnauthenticatedService {
 
-    @Headers("Content-Type: application/x-www-form-urlencoded;charset=UTF-8")
-    @POST("oauth2/token?grant_type=client_credentials")
-    fun test(): Single<ResponseBody>
-
-    // @Headers("Content-Type: application/json;charset=UTF-8")
     @POST("oauth/request_token")
     fun requestToken(): Single<ResponseBody>
 
