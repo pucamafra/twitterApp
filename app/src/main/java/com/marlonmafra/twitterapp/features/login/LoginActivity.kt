@@ -5,10 +5,12 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
 import com.marlonmafra.twitterapp.R
 import com.marlonmafra.twitterapp.TwitterApp
 import com.marlonmafra.twitterapp.features.home.MainActivity
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 class LoginActivity : AppCompatActivity(), ILoginView {
@@ -136,5 +138,10 @@ class LoginActivity : AppCompatActivity(), ILoginView {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         intent.addFlags(Intent.FLAG_FROM_BACKGROUND)
         startActivity(intent)
+    }
+
+    override fun onLoginError() {
+        Snackbar.make(swipeRefreshLayout, R.string.something_went_wrong, Snackbar.LENGTH_LONG)
+            .show()
     }
 }

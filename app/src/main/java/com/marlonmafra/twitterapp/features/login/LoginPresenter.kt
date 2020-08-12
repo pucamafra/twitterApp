@@ -1,5 +1,6 @@
 package com.marlonmafra.twitterapp.features.login
 
+import androidx.annotation.VisibleForTesting
 import com.marlonmafra.twitterapp.features.LifecyclePresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -9,7 +10,8 @@ class LoginPresenter @Inject constructor(
     private val interactor: LoginInteractor
 ) : LifecyclePresenter<ILoginView>() {
 
-    private var requestToken: String = ""
+    @VisibleForTesting
+    var requestToken: String = ""
 
     fun authenticate() {
         interactor.requestToken()
@@ -19,7 +21,7 @@ class LoginPresenter @Inject constructor(
                 requestToken = it.oauthToken
                 view?.openCallBack(requestToken)
             }, {
-                println(it)
+                view?.onLoginError()
             })
             .autoDisposable()
     }
@@ -31,7 +33,7 @@ class LoginPresenter @Inject constructor(
             .subscribe({
                 view?.goToHome()
             }, {
-                println(it)
+                view?.onLoginError()
             })
             .autoDisposable()
     }
