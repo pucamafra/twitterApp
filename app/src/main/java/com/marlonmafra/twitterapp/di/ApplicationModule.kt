@@ -23,10 +23,4 @@ class ApplicationModule(
     fun provideResources(context: Context): Resources {
         return context.resources
     }
-
-    @Provides
-    @Singleton
-    fun provideHomeViewModelFactory(interactor: MainInteractor): HomeViewModelFactory {
-        return HomeViewModelFactory(interactor)
-    }
 }

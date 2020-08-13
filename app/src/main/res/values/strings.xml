@@ -10,4 +10,7 @@
     <string name="title_activity_main2">MainActivity</string>
     <string name="title_timeline">Timeline</string>
     <string name="title_map">Map</string>
+    <string name="login_button_title">Sign in with Twitter</string>
+    <string name="login_title">Twitter</string>
+    <string name="login_subtitle">Tweet the world out</string>
 </resources>

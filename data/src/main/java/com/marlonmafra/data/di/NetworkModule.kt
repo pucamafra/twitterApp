@@ -131,4 +131,11 @@ class NetworkModule(
     fun provideApiService(@Named("auth-retrofit") retrofit: Retrofit): ApiService {
         return retrofit.create(ApiService::class.java)
     }
+
+    @Singleton
+    @Provides
+    @Named("callback-url")
+    fun provideCallbackUrl(): String {
+        return context.getString(R.string.callback_url)
+    }
 }

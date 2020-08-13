@@ -7,11 +7,12 @@ import io.reactivex.Single
 import javax.inject.Inject
 
 class AuthenticationRemoteDataSource @Inject constructor(
-    private val unauthenticatedService: UnauthenticatedService
+    private val unauthenticatedService: UnauthenticatedService,
+    private val callbackUrl: String
 ) : IAuthenticationRemoteDataSource {
 
     override fun requestToken(): Single<RequestTokenResponse> {
-        return unauthenticatedService.requestToken()
+        return unauthenticatedService.requestToken(callbackUrl)
             .map { RequestTokenResponse(it.string()) }
     }
 

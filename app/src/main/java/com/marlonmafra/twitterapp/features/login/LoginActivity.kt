@@ -5,143 +5,87 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.snackbar.Snackbar.LENGTH_LONG
 import com.marlonmafra.twitterapp.R
 import com.marlonmafra.twitterapp.TwitterApp
+import com.marlonmafra.twitterapp.extension.changeVisibility
+import com.marlonmafra.twitterapp.extension.isValid
+import com.marlonmafra.twitterapp.extension.toCallbackResponse
+import com.marlonmafra.twitterapp.features.IntentAction
 import com.marlonmafra.twitterapp.features.home.MainActivity
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.loading_progress_bar.*
 import javax.inject.Inject
 
-class LoginActivity : AppCompatActivity(), ILoginView {
+class LoginActivity : AppCompatActivity() {
 
     companion object {
         fun createInstance(context: Context): Intent = Intent(context, LoginActivity::class.java)
     }
 
     @Inject
-    lateinit var presenter: LoginPresenter
+    lateinit var loginViewModelFactory: LoginViewModelFactory
+
+    private lateinit var viewModel: LoginViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         TwitterApp.component?.inject(this)
+        viewModel = ViewModelProvider(this, loginViewModelFactory).get(LoginViewModel::class.java)
+        setupLayout()
+        setupObservers()
+    }
 
-        presenter.attachView(this, lifecycle)
-
-        authenticateButton.setOnClickListener {
-            presenter.authenticate()
-        }
-
-        accessTokenButton.setOnClickListener {
-            presenter.requestAccessToken(verifier.editableText.toString())
+    private fun setupLayout() {
+        signInButton.setOnClickListener {
+            viewModel.authenticate()
         }
     }
 
-    override fun goToHome() {
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
-    }
+    private fun setupObservers() {
+        viewModel.progressBar.observe(this, Observer { show ->
+            loadingProgressBar.changeVisibility(show)
+        })
 
-    /* private fun authenticate() {
-         unauthenticatedService
-             .requestToken()
-             .observeOn(AndroidSchedulers.mainThread())
-             .subscribeOn(Schedulers.io())
-             .map {
-                 println(it)
-                 it
-             }
-             .subscribe({
-                 println(it)
-                 val split = it.string().split('&')
-                 requestToken = split.get(0).removePrefix("oauth_token=")
-
-                 openCallBack(requestToken)
-             }, {
-                 println(it)
-             })
-     }
- */
-    /* private fun requestAccessToken(verifier: String) {
-         unauthenticatedService
-             .accessToken(verifier, requestToken)
-             .observeOn(AndroidSchedulers.mainThread())
-             .subscribeOn(Schedulers.io())
-             .map {
-                 println(it)
-                 it
-             }
-             .subscribe({
-                 println(it)
-
-                 val split = it.string().split('&')
-                 val oauth_token = split.get(0).removePrefix("oauth_token=")
-                 val requestTokenSecret = split.get(1).removePrefix("oauth_token_secret=")
-
-                 Test.oauthToken = oauth_token
-                 Test.oauthTokenSecret = requestTokenSecret
-             }, {
-                 println(it)
-             })
-     }*/
-
-    /*private fun timeLine() {
-        apiService
-            .userTimeline()
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
-            .map {
-                println(it)
-                it
+        viewModel.showError.observe(this, Observer {
+            if (it) {
+                Snackbar.make(rootLayout, R.string.something_went_wrong, LENGTH_LONG).show()
             }
-            .subscribe({
-                println(it)
-            }, {
-                println(it)
-            })
-    }
-*/
-    /*  private fun openCallbackURL(oauthToken: String) {
-          val url = "https://api.twitter.com/oauth/authenticate?oauth_token=$oauthToken"
+        })
 
-          val uri = Uri.parse(url)
-          val intent = Intent(Intent.ACTION_VIEW, uri)
-          intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-          intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-          intent.addFlags(Intent.FLAG_FROM_BACKGROUND)
-          startActivity(intent)
-      }*/
+        viewModel.openCallback.observe(this, Observer {
+            openCallBack(it)
+        })
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        val t = intent
-        println()
-    }
-
-    override fun onNewIntent(intent: Intent?) {
-        super.onNewIntent(intent)
-        println()
+        viewModel.intentAction.observe(this, Observer {
+            if (it == IntentAction.Home) {
+                startActivity(MainActivity.createInstance(this))
+            }
+        })
     }
 
     override fun onResume() {
         super.onResume()
-        println()
+        intent.data?.let {
+            val callbackURL = getString(R.string.callback_url)
+            if (it.isValid(callbackURL)) {
+                val callbackResponse = it.toCallbackResponse()
+                val token = callbackResponse.oauthToken
+                val verifier = callbackResponse.oauthVerifier
+                if (token != null && verifier != null) {
+                    viewModel.requestAccessToken(token, verifier)
+                }
+            }
+        }
     }
 
-    override fun openCallBack(oauthToken: String) {
-        //val url = "https://api.twitter.com/oauth/authenticate?oauth_token=$oauthToken"
-        val url = getString(R.string.callback_url, oauthToken)
-        val uri = Uri.parse(url)
+    private fun openCallBack(oauthToken: String) {
+        val uri = Uri.parse(getString(R.string.authentication_url, oauthToken))
         val intent = Intent(Intent.ACTION_VIEW, uri)
-        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        intent.addFlags(Intent.FLAG_FROM_BACKGROUND)
         startActivity(intent)
-    }
-
-    override fun onLoginError() {
-        Snackbar.make(swipeRefreshLayout, R.string.something_went_wrong, Snackbar.LENGTH_LONG)
-            .show()
     }
 }

@@ -16,6 +16,25 @@
         <item name="android:windowDisablePreview">true</item>
     </style>
 
+    <style name="loginTitle" parent="Widget.AppCompat.TextView">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/md_text_size_headline_3_regular</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="loginSubtitle" parent="Widget.AppCompat.TextView">
+        <item name="android:textStyle">italic</item>
+        <item name="android:textSize">@dimen/md_text_size_headline_5_regular</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="signInButton" parent="Widget.AppCompat.TextView">
+        <item name="android:backgroundTint">@color/colorPrimary</item>
+        <item name="icon">@drawable/ic_twitter</item>
+        <item name="iconSize">40dp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
     <style name="usernameItemList" parent="Widget.AppCompat.TextView">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">@dimen/username_item_list_text_size</item>

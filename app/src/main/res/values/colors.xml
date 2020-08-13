@@ -5,4 +5,5 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="progress_background">#99000000</color>
     <color name="blue">#498FE3</color>
+    <color name="blur_color">#99000000</color>
 </resources>

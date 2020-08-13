@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.marlonmafra.twitterapp">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:name=".TwitterApp"
         android:allowBackup="true"
@@ -23,7 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".features.login.LoginActivity">
+        <activity
+            android:name=".features.login.LoginActivity"
+            android:theme="@style/FullScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -31,27 +31,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="twitter/app"
-                    android:scheme="https" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="minhaufsc.oauth.ufsc.br"
-                    android:scheme="https" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="twitter/app"
+                    android:host="www.myapp.com.br"
                     android:scheme="https" />
             </intent-filter>
         </activity>
@@ -66,5 +46,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

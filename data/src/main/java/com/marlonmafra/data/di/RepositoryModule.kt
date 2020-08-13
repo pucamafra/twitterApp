@@ -35,8 +35,11 @@ class RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideAuthenticationRemoteDataSource(unauthenticatedService: UnauthenticatedService): IAuthenticationRemoteDataSource {
-        return AuthenticationRemoteDataSource(unauthenticatedService)
+    fun provideAuthenticationRemoteDataSource(
+        unauthenticatedService: UnauthenticatedService,
+        @Named("callback-url") callbackUrl: String
+    ): IAuthenticationRemoteDataSource {
+        return AuthenticationRemoteDataSource(unauthenticatedService, callbackUrl)
     }
 
     @Provides
