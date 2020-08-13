@@ -28,6 +28,9 @@ ext {
     mockkVersion = "1.10.0"
     junitVersion = "4.13"
     mapVersion = "17.0.0"
+    navigationVersion = "2.3.0"
+    signPostCoreVersion = "1.2.1.2"
+    signPostOkhttpVersion = "1.1.0"
 
     uiDependencies = [
             flexibleAdapter: "eu.davidea:flexible-adapter:$flexibleAdapterVersion"
@@ -44,19 +47,23 @@ ext {
             daggerCompiler    : "com.google.dagger:dagger-compiler:$daggerVersion",
             jsr250api         : "javax.annotation:jsr250-api:$jsr250ApiVersion",
             javaxInject       : "javax.inject:javax.inject:$javaxInjectVersion",
-            googleMaps        : "com.google.android.gms:play-services-maps:$mapVersion"
+            googleMaps        : "com.google.android.gms:play-services-maps:$mapVersion",
+            navigationFragment: "androidx.navigation:navigation-fragment-ktx:$navigationVersion",
+            navigationUI      : "androidx.navigation:navigation-ui-ktx:$navigationVersion"
     ]
 
     kotlinDependencies = [
             kotlinStdlib: "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
     ]
 
-    squareDependencies = [
+    networkDependencies = [
             picasso               : "com.squareup.picasso:picasso:$picassoVersion",
             retrofit2gson         : "com.squareup.retrofit2:converter-gson:$retrofitVerson",
             retrofit2rxjavaAdapter: "com.squareup.retrofit2:adapter-rxjava2:$retrofitVerson",
             okhttp3               : "com.squareup.okhttp3:okhttp:$okHttpVersion",
             okhttp3logging        : "com.squareup.okhttp3:logging-interceptor:$okHttpVersion",
+            signPostCore          : "oauth.signpost:signpost-core:$signPostCoreVersion",
+            signPostOkhttp        : "se.akerfeldt:okhttp-signpost:$signPostOkhttpVersion"
     ]
 
     rxDependencies = [

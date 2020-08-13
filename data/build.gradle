@@ -37,17 +37,20 @@ dependencies {
     implementation project(":domain")
 
     def googleDependencies = rootProject.ext.googleDependencies
-    def squareDependencies = rootProject.ext.squareDependencies
+    def networkDependencies = rootProject.ext.networkDependencies
     def rxDependencies = rootProject.ext.rxDependencies
     def testDependencies = rootProject.ext.testDependencies
+    def kotlinDependencies = rootProject.ext.kotlinDependencies
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation kotlinDependencies.kotlinStdlib
 
-    // Square
-    implementation squareDependencies.retrofit2gson
-    implementation squareDependencies.retrofit2rxjavaAdapter
-    implementation squareDependencies.okhttp3
-    implementation squareDependencies.okhttp3logging
+    // Network
+    implementation networkDependencies.retrofit2gson
+    implementation networkDependencies.retrofit2rxjavaAdapter
+    implementation networkDependencies.okhttp3
+    implementation networkDependencies.okhttp3logging
+    implementation networkDependencies.signPostCore
+    implementation networkDependencies.signPostOkhttp
 
     // Google
     implementation googleDependencies.securityCrypto
@@ -63,9 +66,6 @@ dependencies {
     implementation rxDependencies.rxJava
     implementation rxDependencies.rxAndroid
     implementation rxDependencies.rxKotlin
-
-    implementation 'oauth.signpost:signpost-core:1.2.1.2'
-    implementation 'se.akerfeldt:okhttp-signpost:1.1.0'
 
     // Test
     testImplementation testDependencies.mockk

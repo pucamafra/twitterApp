@@ -42,19 +42,14 @@ android {
 dependencies {
     implementation project(":data")
     implementation project(":domain")
-    implementation 'androidx.navigation:navigation-fragment:2.3.0'
-    implementation 'androidx.navigation:navigation-ui:2.3.0'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     def googleDependencies = rootProject.ext.googleDependencies
     def kotlinDependencies = rootProject.ext.kotlinDependencies
-    def squareDependencies = rootProject.ext.squareDependencies
+    def networkDependencies = rootProject.ext.networkDependencies
     def rxDependencies = rootProject.ext.rxDependencies
     def uiDependencies = rootProject.ext.uiDependencies
     def testDependencies = rootProject.ext.testDependencies
 
-    implementation uiDependencies.flexibleAdapter
-
-    // Google
+    // Google/UI
     implementation googleDependencies.material
     implementation googleDependencies.coreKTX
     implementation googleDependencies.appCompat
@@ -62,10 +57,15 @@ dependencies {
     implementation googleDependencies.swipeRefreshLayout
     implementation googleDependencies.securityCrypto
     implementation googleDependencies.googleMaps
+    implementation googleDependencies.navigationFragment
+    implementation googleDependencies.navigationUI
+    implementation uiDependencies.flexibleAdapter
 
-    // Square
-    implementation squareDependencies.retrofit2gson
-    implementation squareDependencies.picasso
+    // Network
+    implementation networkDependencies.retrofit2gson
+    implementation networkDependencies.picasso
+    implementation networkDependencies.signPostCore
+    implementation networkDependencies.signPostOkhttp
 
     // DAGGER 2
     implementation googleDependencies.dagger
@@ -80,13 +80,6 @@ dependencies {
     implementation rxDependencies.rxJava
     implementation rxDependencies.rxAndroid
     implementation rxDependencies.rxKotlin
-
-    implementation 'oauth.signpost:signpost-core:1.2.1.2'
-    implementation 'se.akerfeldt:okhttp-signpost:1.1.0'
-
-    def navVersion = "2.3.0"
-    implementation "androidx.navigation:navigation-fragment-ktx:$navVersion"
-    implementation "androidx.navigation:navigation-ui-ktx:$navVersion"
 
     // Test
     testImplementation testDependencies.mockk
