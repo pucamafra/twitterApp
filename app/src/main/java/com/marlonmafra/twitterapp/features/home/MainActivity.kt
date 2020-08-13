@@ -10,12 +10,15 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.snackbar.Snackbar.LENGTH_LONG
 import com.marlonmafra.twitterapp.R
 import com.marlonmafra.twitterapp.TwitterApp
 import com.marlonmafra.twitterapp.extension.changeVisibility
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.loading_progress_bar.*
 import kotlinx.android.synthetic.main.toolbar.toolbar
+import org.jetbrains.annotations.TestOnly
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -34,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         TwitterApp.component?.inject(this)
         viewModel = ViewModelProvider(this, homeViewModelFactory).get(HomeViewModel::class.java)
+        viewModel.retrieveTimeLine()
         setupLayout()
         setupObserver()
     }
@@ -58,5 +62,16 @@ class MainActivity : AppCompatActivity() {
                 swipeRefreshLayout.isRefreshing = false
             }
         })
+
+        viewModel.showError.observe(this, Observer {
+            if (it) {
+                Snackbar.make(swipeRefreshLayout, R.string.something_went_wrong, LENGTH_LONG).show()
+            }
+        })
+    }
+
+    @TestOnly
+    fun setTestViewModel(testViewModel: HomeViewModel) {
+        viewModel = testViewModel
     }
 }

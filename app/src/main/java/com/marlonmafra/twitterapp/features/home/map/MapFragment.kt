@@ -46,7 +46,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun setupObserver() {
-        homeViewModel.userClicked.observe(viewLifecycleOwner, Observer {
+        homeViewModel.userProfileClicked.observe(viewLifecycleOwner, Observer {
             startActivity(ProfileActivity.createInstance(requireActivity(), it))
         })
     }

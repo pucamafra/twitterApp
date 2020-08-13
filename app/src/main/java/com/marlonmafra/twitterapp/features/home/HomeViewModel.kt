@@ -8,32 +8,17 @@ import com.marlonmafra.twitterapp.features.home.ui.TweetItemList
 import eu.davidea.flexibleadapter.items.AbstractFlexibleItem
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import io.reactivex.subjects.PublishSubject
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(
     private val interactor: MainInteractor
 ) : BaseViewModel() {
 
-    private var profileClickObserver = PublishSubject.create<User>()
-    val userClicked = MutableLiveData<User>()
+    val userProfileClicked = MutableLiveData<User>()
     val progressBar = MutableLiveData<Boolean>()
     val tweeList = MutableLiveData<List<Tweet>>()
     val tweetListMapped = MutableLiveData<List<AbstractFlexibleItem<*>>>()
-
-    init {
-        retrieveTimeLine()
-        setupObserver()
-    }
-
-    private fun setupObserver() {
-        profileClickObserver
-            .subscribe({
-                userClicked.value = it
-            }, {
-            })
-            .autoDisposable()
-    }
+    val showError = MutableLiveData<Boolean>()
 
     fun retrieveTimeLine() {
         interactor.fetchHomeTimeline()
@@ -41,16 +26,16 @@ class HomeViewModel @Inject constructor(
             .doOnSubscribe { progressBar.value = true }
             .observeOn(AndroidSchedulers.mainThread())
             .doAfterTerminate { progressBar.value = false }
-            .subscribe({
-                handleResult(it)
-            }, {
-                //view?.onRetrieveTweetError()
-            })
+            .subscribe({ handleResult(it) }, { handleError() })
             .autoDisposable()
     }
 
     private fun handleResult(list: List<Tweet>) {
         tweeList.value = list
-        tweetListMapped.value = list.map { TweetItemList(it, profileClickObserver) }
+        tweetListMapped.value = list.map { TweetItemList(it, userProfileClicked) }
+    }
+
+    private fun handleError() {
+        showError.value = true
     }
 }

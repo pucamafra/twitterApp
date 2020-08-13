@@ -46,7 +46,7 @@ class TimelineFragment : Fragment() {
             adapter.updateDataSet(it)
         })
 
-        homeViewModel.userClicked.observe(viewLifecycleOwner, Observer {
+        homeViewModel.userProfileClicked.observe(viewLifecycleOwner, Observer {
             startActivity(ProfileActivity.createInstance(requireActivity(), it))
         })
     }

@@ -2,6 +2,7 @@ package com.marlonmafra.twitterapp.features.splash
 
 import androidx.lifecycle.MutableLiveData
 import com.marlonmafra.twitterapp.features.BaseViewModel
+import com.marlonmafra.twitterapp.features.IntentAction
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
@@ -10,7 +11,7 @@ class SplashViewModel @Inject constructor(
     private val interactor: SplashInteractor
 ) : BaseViewModel() {
 
-    val checkAuthentication = MutableLiveData<SplashAction>()
+    val intentAction = MutableLiveData<IntentAction>()
     val progressBar = MutableLiveData<Boolean>()
 
     fun checkAuthentication() {
@@ -25,14 +26,14 @@ class SplashViewModel @Inject constructor(
 
     private fun handleSuccess(logged: Boolean) {
         val action = if (logged) {
-            SplashAction.Home
+            IntentAction.Home
         } else {
-            SplashAction.Login
+            IntentAction.Login
         }
-        checkAuthentication.value = action
+        intentAction.value = action
     }
 
     private fun handleError() {
-        checkAuthentication.value = SplashAction.Login
+        intentAction.value = IntentAction.Login
     }
 }
