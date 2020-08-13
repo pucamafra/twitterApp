@@ -6,4 +6,9 @@
         android:icon="@drawable/ic_timeline"
         android:title="@string/title_timeline" />
 
+    <item
+        android:id="@+id/navigation_map"
+        android:icon="@drawable/ic_map"
+        android:title="@string/title_map" />
+
 </menu>

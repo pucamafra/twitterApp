@@ -9,4 +9,5 @@
     <string name="something_went_wrong">Something went wrong, please try again</string>
     <string name="title_activity_main2">MainActivity</string>
     <string name="title_timeline">Timeline</string>
+    <string name="title_map">Map</string>
 </resources>

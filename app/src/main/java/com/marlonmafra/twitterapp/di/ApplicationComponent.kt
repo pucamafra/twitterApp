@@ -4,6 +4,7 @@ import com.marlonmafra.data.di.NetworkModule
 import com.marlonmafra.data.di.RepositoryModule
 import com.marlonmafra.twitterapp.TwitterApp
 import com.marlonmafra.twitterapp.features.home.MainActivity
+import com.marlonmafra.twitterapp.features.home.map.MapFragment
 import com.marlonmafra.twitterapp.features.home.timeline.TimelineFragment
 import com.marlonmafra.twitterapp.features.login.LoginActivity
 import com.marlonmafra.twitterapp.features.profile.ProfileActivity
@@ -25,4 +26,6 @@ interface ApplicationComponent {
     fun inject(splashActivity: SplashActivity)
 
     fun inject(timelineFragment: TimelineFragment)
+
+    fun inject(mapFragment: MapFragment)
 }

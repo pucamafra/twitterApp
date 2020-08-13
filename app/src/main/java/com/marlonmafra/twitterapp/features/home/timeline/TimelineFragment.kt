@@ -42,7 +42,7 @@ class TimelineFragment : Fragment() {
     }
 
     private fun setupObserver() {
-        homeViewModel.tweetList.observe(viewLifecycleOwner, Observer {
+        homeViewModel.tweetListMapped.observe(viewLifecycleOwner, Observer {
             adapter.updateDataSet(it)
         })
 

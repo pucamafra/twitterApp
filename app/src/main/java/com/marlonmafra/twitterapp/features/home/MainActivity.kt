@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         val navController = findNavController(R.id.container)
         val appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.navigation_timeline)
+            setOf(R.id.navigation_timeline, R.id.navigation_map)
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         bottomBar.setupWithNavController(navController)

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.marlonmafra.twitterapp">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".TwitterApp"
         android:allowBackup="true"
@@ -11,9 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".features.home.MainActivity2"
-            android:label="@string/title_activity_main2"></activity>
+
         <activity
             android:name=".features.splash.SplashActivity"
             android:theme="@style/FullScreenTheme">
@@ -61,8 +61,10 @@
         <activity
             android:name=".features.profile.ProfileActivity"
             android:label="@string/empty" />
-    </application>
 
-    <uses-permission android:name="android.permission.INTERNET" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+    </application>
 
 </manifest>

@@ -5,4 +5,5 @@
     <string name="access_token">1682143086-hLEbn0Ezjwwf2gLs45faGbHqbmK9ioroKEMUamS</string>
     <string name="access_token_secret">X0zgfqlx6t0xmfFi0ykXMhncX3JTrSpJB4ddEeN7VUpyo</string>
     <string name="callback_url">https://api.twitter.com/oauth/authenticate?oauth_token=%1s</string>
+    <string name="google_maps_key">AIzaSyAO3U-BnH7JaQdfgNrQzvxGjzQVA7CKvrQ</string>
 </resources>

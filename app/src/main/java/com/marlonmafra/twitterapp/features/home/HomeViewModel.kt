@@ -1,6 +1,5 @@
 package com.marlonmafra.twitterapp.features.home
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.marlonmafra.domain.model.Tweet
 import com.marlonmafra.domain.model.User
@@ -17,9 +16,10 @@ class HomeViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     private var profileClickObserver = PublishSubject.create<User>()
-    val tweetList = MutableLiveData<List<AbstractFlexibleItem<*>>>()
     val userClicked = MutableLiveData<User>()
     val progressBar = MutableLiveData<Boolean>()
+    val tweeList = MutableLiveData<List<Tweet>>()
+    val tweetListMapped = MutableLiveData<List<AbstractFlexibleItem<*>>>()
 
     init {
         retrieveTimeLine()
@@ -50,6 +50,7 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun handleResult(list: List<Tweet>) {
-        tweetList.value = list.map { TweetItemList(it, profileClickObserver) }
+        tweeList.value = list
+        tweetListMapped.value = list.map { TweetItemList(it, profileClickObserver) }
     }
 }

@@ -27,6 +27,7 @@ ext {
     picassoVersion = "2.71828"
     mockkVersion = "1.10.0"
     junitVersion = "4.13"
+    mapVersion = "17.0.0"
 
     uiDependencies = [
             flexibleAdapter: "eu.davidea:flexible-adapter:$flexibleAdapterVersion"
@@ -43,6 +44,7 @@ ext {
             daggerCompiler    : "com.google.dagger:dagger-compiler:$daggerVersion",
             jsr250api         : "javax.annotation:jsr250-api:$jsr250ApiVersion",
             javaxInject       : "javax.inject:javax.inject:$javaxInjectVersion",
+            googleMaps        : "com.google.android.gms:play-services-maps:$mapVersion"
     ]
 
     kotlinDependencies = [
@@ -65,6 +67,6 @@ ext {
 
     testDependencies = [
             mockk: "io.mockk:mockk:$mockkVersion",
-            junit : "junit:junit:$junitVersion"
+            junit: "junit:junit:$junitVersion"
     ]
 }

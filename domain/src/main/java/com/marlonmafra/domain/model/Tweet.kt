@@ -9,7 +9,8 @@ import java.util.Date
 data class Tweet(
     @SerializedName("created_at") val createdAt: Date,
     val text: String,
-    val user: User
+    val user: User,
+    var coordinates: Coordinate
 ) : Parcelable
 
 @Parcelize
@@ -29,3 +30,23 @@ data class User(
     @SerializedName("friends_count") val following: Int,
     @SerializedName("followers_count") val followers: Int
 ) : Parcelable
+
+@Parcelize
+data class Coordinate(
+    val coordinates: Array<Double>
+) : Parcelable {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Coordinate
+
+        if (!coordinates.contentEquals(other.coordinates)) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return coordinates.contentHashCode()
+    }
+}

@@ -10,4 +10,10 @@
         android:name="com.marlonmafra.twitterapp.features.home.timeline.TimelineFragment"
         android:label="@string/title_timeline"
         tools:layout="@layout/fragment_timeline" />
+
+    <fragment
+        android:id="@+id/navigation_map"
+        android:name="com.marlonmafra.twitterapp.features.home.map.MapFragment"
+        android:label="@string/title_map"
+        tools:layout="@layout/fragment_map" />
 </navigation>
