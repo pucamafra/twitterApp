@@ -58,7 +58,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             googleMap.setOnMarkerClickListener {
                 val user = tweetList[it.tag as Int].user
                 startActivity(ProfileActivity.createInstance(requireContext(), user))
-                false
+                true
             }
         })
     }

@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.marlonmafra.domain.model.Tweet
 import com.marlonmafra.twitterapp.extension.toLatLng
@@ -22,40 +23,59 @@ class PicassoMarker(
     }
 
     val coordinateList = mutableListOf<LatLng>()
-    private val targetList = mutableListOf<Target>()
+    private val markerTargetList = hashSetOf<MarkerTarget>()
 
     init {
         setup()
     }
 
     private fun setup() {
+        var markerTarget: MarkerTarget
         tweetList.forEachIndexed { index, tweet ->
-            val position = tweet.coordinates.toLatLng()
-            coordinateList.add(position)
+            val coordinate = tweet.coordinates.toLatLng()
+            coordinateList.add(coordinate)
 
-            val target = object : Target {
-                override fun onBitmapLoaded(bitmap: Bitmap, from: Picasso.LoadedFrom) {
-                    val marker = googleMap.addMarker(createMarker(position, bitmap))
-                    marker.tag = index
-                }
+            val marker = googleMap.addMarker(createMarker(coordinate))
+            marker.tag = index
 
-                override fun onBitmapFailed(e: Exception, errorDrawable: Drawable) = Unit
+            markerTarget = MarkerTarget(marker)
+            markerTargetList.add(markerTarget)
+            markerTarget.loadMarkerWithUrl(tweet.user.profileImageUrl)
 
-                override fun onPrepareLoad(placeHolderDrawable: Drawable?) = Unit
-            }
-
-            Picasso.get().load(tweet.user.profileImageUrl)
+            Picasso.get()
+                .load(tweet.user.profileImageUrl)
                 .transform(RoundedTransformation(RADIUS))
                 .resize(IMAGE_SIZE, IMAGE_SIZE)
-                .into(target)
-
-            targetList.add(target)
+                .into(markerTarget)
         }
     }
 
-    private fun createMarker(position: LatLng, iconId: Bitmap): MarkerOptions {
+    private fun createMarker(position: LatLng): MarkerOptions {
         return MarkerOptions()
             .position(position)
-            .icon(BitmapDescriptorFactory.fromBitmap(iconId))
+    }
+
+    inner class MarkerTarget(
+        private val marker: Marker
+    ) : Target {
+
+        override fun onBitmapLoaded(bitmap: Bitmap, from: Picasso.LoadedFrom) {
+            marker.setIcon(BitmapDescriptorFactory.fromBitmap(bitmap))
+            markerTargetList.remove(this)
+        }
+
+        override fun onPrepareLoad(placeHolderDrawable: Drawable?) = Unit
+
+        override fun onBitmapFailed(e: Exception, errorDrawable: Drawable) {
+            markerTargetList.remove(this)
+        }
+    }
+
+    private fun MarkerTarget.loadMarkerWithUrl(url: String) {
+        Picasso.get()
+            .load(url)
+            .transform(RoundedTransformation(RADIUS))
+            .resize(IMAGE_SIZE, IMAGE_SIZE)
+            .into(this)
     }
 }
