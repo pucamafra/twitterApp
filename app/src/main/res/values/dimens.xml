@@ -39,4 +39,7 @@
     <dimen name="md_text_size_button_medium">14sp</dimen>
     <dimen name="md_text_size_caption_regular">12sp</dimen>
     <dimen name="md_text_size_overline_regular">10sp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
 </resources>

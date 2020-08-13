@@ -5,11 +5,12 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 import java.util.Date
 
+@Parcelize
 data class Tweet(
     @SerializedName("created_at") val createdAt: Date,
     val text: String,
     val user: User
-)
+) : Parcelable
 
 @Parcelize
 data class User(

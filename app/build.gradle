@@ -30,6 +30,9 @@ android {
             jvmTarget = JavaVersion.VERSION_1_8
         }
     }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 
     androidExtensions {
         experimental = true
@@ -39,6 +42,9 @@ android {
 dependencies {
     implementation project(":data")
     implementation project(":domain")
+    implementation 'androidx.navigation:navigation-fragment:2.3.0'
+    implementation 'androidx.navigation:navigation-ui:2.3.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     def googleDependencies = rootProject.ext.googleDependencies
     def kotlinDependencies = rootProject.ext.kotlinDependencies
     def squareDependencies = rootProject.ext.squareDependencies
@@ -76,6 +82,11 @@ dependencies {
 
     implementation 'oauth.signpost:signpost-core:1.2.1.2'
     implementation 'se.akerfeldt:okhttp-signpost:1.1.0'
+
+    def navVersion = "2.3.0-alpha04"
+
+    implementation "androidx.navigation:navigation-fragment-ktx:$navVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$navVersion"
 
     // Test
     testImplementation testDependencies.mockk

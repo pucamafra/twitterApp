@@ -4,71 +4,59 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
-import com.marlonmafra.domain.model.User
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.marlonmafra.twitterapp.R
 import com.marlonmafra.twitterapp.TwitterApp
 import com.marlonmafra.twitterapp.extension.changeVisibility
-import com.marlonmafra.twitterapp.features.profile.ProfileActivity
-import eu.davidea.flexibleadapter.FlexibleAdapter
-import eu.davidea.flexibleadapter.items.AbstractFlexibleItem
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.loading_progress_bar.*
 import kotlinx.android.synthetic.main.toolbar.toolbar
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), IMainView {
+class MainActivity : AppCompatActivity() {
 
     companion object {
         fun createInstance(context: Context): Intent = Intent(context, MainActivity::class.java)
     }
 
     @Inject
-    lateinit var presenter: MainPresenter
+    lateinit var homeViewModelFactory: HomeViewModelFactory
 
-    private val adapter = FlexibleAdapter(ArrayList())
+    private lateinit var viewModel: HomeViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         TwitterApp.component?.inject(this)
+        viewModel = ViewModelProvider(this, homeViewModelFactory).get(HomeViewModel::class.java)
         setupLayout()
-        presenter.attachView(this, lifecycle)
-        presenter.retrieveTimeLine()
+        setupObserver()
     }
 
     private fun setupLayout() {
-        val layoutManager = LinearLayoutManager(this)
-        val dividerItemDecoration = DividerItemDecoration(this, layoutManager.orientation)
-        tweetListView.layoutManager = layoutManager
-        tweetListView.addItemDecoration(dividerItemDecoration)
-        tweetListView.adapter = adapter
         setSupportActionBar(toolbar)
+        val navController = findNavController(R.id.container)
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(R.id.navigation_timeline)
+        )
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        bottomBar.setupWithNavController(navController)
         swipeRefreshLayout.setOnRefreshListener {
-            presenter.retrieveTimeLine()
+            viewModel.retrieveTimeLine()
         }
     }
 
-    override fun showTweetList(items: List<AbstractFlexibleItem<*>>) {
-        adapter.updateDataSet(items)
-    }
-
-    override fun changeProgressBarVisibility(show: Boolean) {
-        loadingProgressBar.changeVisibility(show)
-    }
-
-    override fun hideRefreshingView() {
-        swipeRefreshLayout.isRefreshing = false
-    }
-
-    override fun goToProfileScreen(user: User) {
-        startActivity(ProfileActivity.createInstance(this, user))
-    }
-
-    override fun onRetrieveTweetError() {
-        Snackbar.make(swipeRefreshLayout, R.string.something_went_wrong, Snackbar.LENGTH_LONG)
-            .show()
+    private fun setupObserver() {
+        viewModel.progressBar.observe(this, Observer { show ->
+            loadingProgressBar.changeVisibility(show)
+            if (!show) {
+                swipeRefreshLayout.isRefreshing = false
+            }
+        })
     }
 }
