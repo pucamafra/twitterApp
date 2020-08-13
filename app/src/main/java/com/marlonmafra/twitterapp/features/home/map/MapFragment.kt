@@ -55,13 +55,17 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         homeViewModel.tweeList.observe(viewLifecycleOwner, Observer { tweetList ->
             picassoMarker = PicassoMarker(googleMap, tweetList)
             picassoMarker?.let { adjustBoundsOnMap(googleMap, it.coordinateList) }
+            googleMap.setOnMarkerClickListener {
+                val user = tweetList[it.tag as Int].user
+                startActivity(ProfileActivity.createInstance(requireContext(), user))
+                false
+            }
         })
     }
 
     private fun adjustBoundsOnMap(map: GoogleMap, markersCoordinateList: List<LatLng>) {
         val bounds = getLatLngBounds(markersCoordinateList)
         val cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, 0)
-
         map.moveCamera(cameraUpdate)
         map.moveCamera(CameraUpdateFactory.zoomTo(map.cameraPosition.zoom - 1.5f))
     }

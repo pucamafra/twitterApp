@@ -22,20 +22,21 @@ class PicassoMarker(
     }
 
     val coordinateList = mutableListOf<LatLng>()
-    val targetList = mutableListOf<Target>()
+    private val targetList = mutableListOf<Target>()
 
     init {
         setup()
     }
 
     private fun setup() {
-        tweetList.forEach { tweet ->
+        tweetList.forEachIndexed { index, tweet ->
             val position = tweet.coordinates.toLatLng()
             coordinateList.add(position)
 
             val target = object : Target {
                 override fun onBitmapLoaded(bitmap: Bitmap, from: Picasso.LoadedFrom) {
-                    googleMap.addMarker(createMarker(position, bitmap))
+                    val marker = googleMap.addMarker(createMarker(position, bitmap))
+                    marker.tag = index
                 }
 
                 override fun onBitmapFailed(e: Exception, errorDrawable: Drawable) = Unit
