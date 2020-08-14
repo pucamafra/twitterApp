@@ -1,11 +1,13 @@
 package com.marlonmafra.twitterapp.features.home
 
+import com.marlonmafra.data.repository.authentication.AuthenticationRepository
 import com.marlonmafra.data.repository.twitter.TwitterRepository
 import com.marlonmafra.domain.model.Tweet
 import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
+import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.observers.TestObserver
 import org.junit.Before
@@ -18,6 +20,9 @@ class MainInteractorTest {
 
     @MockK
     private lateinit var twitterRepository: TwitterRepository
+
+    @MockK
+    private lateinit var authenticationRepository: AuthenticationRepository
 
     @Before
     fun setup() {
@@ -47,6 +52,33 @@ class MainInteractorTest {
 
         // When
         interactor.fetchHomeTimeline().subscribe(testObserver)
+
+        // Then
+        testObserver.assertError(Exception::class.java)
+        testObserver.assertNotComplete()
+    }
+
+    @Test
+    fun logout() {
+        // Given
+        every { authenticationRepository.logout() } returns Completable.complete()
+        val testObserver = TestObserver.create<Unit>()
+
+        // When
+        interactor.logout().subscribe(testObserver)
+
+        // Then
+        testObserver.assertComplete()
+    }
+
+    @Test
+    fun logoutException() {
+        // Given
+        every { authenticationRepository.logout() } returns Completable.error(Exception())
+        val testObserver = TestObserver.create<Unit>()
+
+        // When
+        interactor.logout().subscribe(testObserver)
 
         // Then
         testObserver.assertError(Exception::class.java)
