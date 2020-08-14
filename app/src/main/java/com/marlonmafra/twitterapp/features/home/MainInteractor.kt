@@ -1,14 +1,17 @@
 package com.marlonmafra.twitterapp.features.home
 
+import com.marlonmafra.data.repository.authentication.AuthenticationRepository
 import com.marlonmafra.data.repository.twitter.TwitterRepository
 import com.marlonmafra.domain.model.Coordinate
 import com.marlonmafra.domain.model.Tweet
+import io.reactivex.Completable
 import io.reactivex.Single
 import javax.inject.Inject
 import kotlin.random.Random
 
 class MainInteractor @Inject constructor(
-    private val twitterRepository: TwitterRepository
+    private val twitterRepository: TwitterRepository,
+    private val authenticationRepository: AuthenticationRepository
 ) {
 
     fun fetchHomeTimeline(): Single<List<Tweet>> {
@@ -31,5 +34,9 @@ class MainInteractor @Inject constructor(
 
     private fun generateLongitude(): Double {
         return Random.nextDouble(-180.0, 180.0)
+    }
+
+    fun logout(): Completable {
+        return authenticationRepository.logout()
     }
 }

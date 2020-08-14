@@ -7,4 +7,6 @@ interface IAuthenticationLocalDataSource {
     fun getToken(): String?
 
     fun getTokenSecret(): String?
+
+    fun cleanData()
 }

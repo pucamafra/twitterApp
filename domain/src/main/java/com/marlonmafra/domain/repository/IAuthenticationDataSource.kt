@@ -2,6 +2,7 @@ package com.marlonmafra.domain.repository
 
 import com.marlonmafra.domain.model.RequestAccessTokenResponse
 import com.marlonmafra.domain.model.RequestTokenResponse
+import io.reactivex.Completable
 import io.reactivex.Single
 
 interface IAuthenticationDataSource {
@@ -14,4 +15,6 @@ interface IAuthenticationDataSource {
     ): Single<RequestAccessTokenResponse>
 
     fun isAuthenticated(): Boolean
+
+    fun logout(): Completable
 }

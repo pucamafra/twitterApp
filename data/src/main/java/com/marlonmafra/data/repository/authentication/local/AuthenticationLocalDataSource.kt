@@ -29,4 +29,8 @@ class AuthenticationLocalDataSource @Inject constructor(
     override fun getTokenSecret(): String? {
         return sharedPreferences.getString(TOKEN_SECRET, null)
     }
+
+    override fun cleanData() {
+        sharedPreferences.edit().clear().apply()
+    }
 }

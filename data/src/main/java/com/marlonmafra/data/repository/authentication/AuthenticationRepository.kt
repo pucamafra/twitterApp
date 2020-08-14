@@ -5,6 +5,7 @@ import com.marlonmafra.data.repository.authentication.remote.IAuthenticationRemo
 import com.marlonmafra.domain.model.RequestAccessTokenResponse
 import com.marlonmafra.domain.model.RequestTokenResponse
 import com.marlonmafra.domain.repository.IAuthenticationDataSource
+import io.reactivex.Completable
 import io.reactivex.Single
 import javax.inject.Inject
 
@@ -31,5 +32,9 @@ class AuthenticationRepository @Inject constructor(
         val hasToken = local.getToken() != null
         val hasTokenSecret = local.getTokenSecret() != null
         return hasToken && hasTokenSecret
+    }
+
+    override fun logout(): Completable {
+        return Completable.fromAction { local.cleanData() }
     }
 }

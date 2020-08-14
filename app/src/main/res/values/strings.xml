@@ -13,4 +13,5 @@
     <string name="login_button_title">Sign in with Twitter</string>
     <string name="login_title">Twitter</string>
     <string name="login_subtitle">Tweet the world out</string>
+    <string name="action_logout">Logout</string>
 </resources>

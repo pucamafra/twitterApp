@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.marlonmafra.domain.model.Tweet
 import com.marlonmafra.domain.model.User
 import com.marlonmafra.twitterapp.features.BaseViewModel
+import com.marlonmafra.twitterapp.features.IntentAction
 import com.marlonmafra.twitterapp.features.home.ui.TweetItemList
 import eu.davidea.flexibleadapter.items.AbstractFlexibleItem
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -19,6 +20,7 @@ class HomeViewModel @Inject constructor(
     val tweeList = MutableLiveData<List<Tweet>>()
     val tweetListMapped = MutableLiveData<List<AbstractFlexibleItem<*>>>()
     val showError = MutableLiveData<Boolean>()
+    val intentAction = MutableLiveData<IntentAction>()
 
     fun retrieveTimeLine() {
         interactor.fetchHomeTimeline()
@@ -36,6 +38,24 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun handleError() {
+        showError.value = true
+    }
+
+    fun logout() {
+        interactor.logout()
+            .subscribeOn(Schedulers.io())
+            .doOnSubscribe { progressBar.value = true }
+            .observeOn(AndroidSchedulers.mainThread())
+            .doAfterTerminate { progressBar.value = false }
+            .subscribe({ handleLogoutSuccess() }, { handleLogoutError() })
+            .autoDisposable()
+    }
+
+    private fun handleLogoutSuccess() {
+        intentAction.value = IntentAction.Login
+    }
+
+    private fun handleLogoutError() {
         showError.value = true
     }
 }
