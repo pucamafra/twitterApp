@@ -99,5 +99,4 @@
         <item name="android:textSize">@dimen/md_text_size_subtitle_1_regular</item>
     </style>
 
-
 </resources>
