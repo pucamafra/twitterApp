@@ -31,6 +31,7 @@ ext {
     navigationVersion = "2.3.0"
     signPostCoreVersion = "1.2.1.2"
     signPostOkhttpVersion = "1.1.0"
+    coreTestingVersion = "2.1.0"
 
     uiDependencies = [
             flexibleAdapter: "eu.davidea:flexible-adapter:$flexibleAdapterVersion"
@@ -73,7 +74,8 @@ ext {
     ]
 
     testDependencies = [
-            mockk: "io.mockk:mockk:$mockkVersion",
-            junit: "junit:junit:$junitVersion"
+            mockk      : "io.mockk:mockk:$mockkVersion",
+            junit      : "junit:junit:$junitVersion",
+            coreTesting: "androidx.arch.core:core-testing:$coreTestingVersion"
     ]
 }
