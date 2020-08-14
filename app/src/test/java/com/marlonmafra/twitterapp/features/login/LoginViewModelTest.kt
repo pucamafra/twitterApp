@@ -1,9 +1,11 @@
 package com.marlonmafra.twitterapp.features.login
 
+import android.net.Uri
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.marlonmafra.domain.model.RequestAccessTokenResponse
 import com.marlonmafra.domain.model.RequestTokenResponse
+import com.marlonmafra.twitterapp.common.Const
 import com.marlonmafra.twitterapp.features.IntentAction
 import com.marlonmafra.twitterapp.features.RxImmediateSchedulerRule
 import io.mockk.MockKAnnotations
@@ -17,6 +19,12 @@ import org.junit.Rule
 import org.junit.Test
 
 class LoginViewModelTest {
+
+    private val token = "token"
+    private val verifier = "verifier"
+    private val callbackURL =
+        "www.twitter.com?${Const.OAUTH_TOKEN}=$token&${Const.OAUTH_VERIFIER}=$verifier"
+
     @Rule
     @JvmField
     val instantExecutorRule = InstantTaskExecutorRule()
@@ -127,6 +135,74 @@ class LoginViewModelTest {
         verify {
             progressBarObserver.onChanged(true)
             progressBarObserver.onChanged(false)
+            showErrorObserver.onChanged(true)
+        }
+
+        verify(exactly = 0) {
+            intentActionObserver.onChanged(IntentAction.Home)
+        }
+    }
+
+    @Test
+    fun checkCallbackResponse() {
+        // Given
+        val uri: Uri = mockk()
+        val response: RequestAccessTokenResponse = mockk()
+
+        every { uri.toString() } returns callbackURL
+        every { uri.getQueryParameter(Const.OAUTH_TOKEN) } returns token
+        every { uri.getQueryParameter(Const.OAUTH_VERIFIER) } returns verifier
+        every { interactor.requestAccessToken(verifier, token) } returns Single.just(response)
+
+        // When
+        loginViewModel.checkCallbackResponse(uri, callbackURL)
+
+        // Then
+        verify {
+            progressBarObserver.onChanged(true)
+            intentActionObserver.onChanged(IntentAction.Home)
+            progressBarObserver.onChanged(false)
+        }
+
+        verify(exactly = 0) {
+            showErrorObserver.onChanged(true)
+        }
+    }
+
+    @Test
+    fun checkCallbackResponse_nullUri() {
+        // Given
+        val uri: Uri? = null
+
+        // When
+        loginViewModel.checkCallbackResponse(uri, callbackURL)
+
+        // Then
+        verify {
+            showErrorObserver.onChanged(true)
+        }
+
+        verify(exactly = 0) {
+            intentActionObserver.onChanged(IntentAction.Home)
+        }
+    }
+
+    @Test
+    fun checkCallbackResponse_invalidUri() {
+        // Given
+        val uri: Uri = mockk()
+        val response: RequestAccessTokenResponse = mockk()
+
+        every { uri.toString() } returns "differentUri"
+        every { uri.getQueryParameter(Const.OAUTH_TOKEN) } returns token
+        every { uri.getQueryParameter(Const.OAUTH_VERIFIER) } returns verifier
+        every { interactor.requestAccessToken(verifier, token) } returns Single.just(response)
+
+        // When
+        loginViewModel.checkCallbackResponse(uri, callbackURL)
+
+        // Then
+        verify {
             showErrorObserver.onChanged(true)
         }
 

@@ -12,8 +12,6 @@ import com.google.android.material.snackbar.Snackbar.LENGTH_LONG
 import com.marlonmafra.twitterapp.R
 import com.marlonmafra.twitterapp.TwitterApp
 import com.marlonmafra.twitterapp.extension.changeVisibility
-import com.marlonmafra.twitterapp.extension.isValid
-import com.marlonmafra.twitterapp.extension.toCallbackResponse
 import com.marlonmafra.twitterapp.features.IntentAction
 import com.marlonmafra.twitterapp.features.home.MainActivity
 import kotlinx.android.synthetic.main.activity_login.*
@@ -70,16 +68,9 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        intent.data?.let {
+        if (intent?.action?.equals(Intent.ACTION_VIEW) == true) {
             val callbackURL = getString(R.string.callback_url)
-            if (it.isValid(callbackURL)) {
-                val callbackResponse = it.toCallbackResponse()
-                val token = callbackResponse.oauthToken
-                val verifier = callbackResponse.oauthVerifier
-                if (token != null && verifier != null) {
-                    viewModel.requestAccessToken(token, verifier)
-                }
-            }
+            viewModel.checkCallbackResponse(intent.data, callbackURL)
         }
     }
 
