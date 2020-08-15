@@ -3,7 +3,7 @@ package com.marlonmafra.twitterapp.di
 import com.marlonmafra.data.di.NetworkModule
 import com.marlonmafra.data.di.RepositoryModule
 import com.marlonmafra.twitterapp.TwitterApp
-import com.marlonmafra.twitterapp.features.home.MainActivity
+import com.marlonmafra.twitterapp.features.home.HomeActivity
 import com.marlonmafra.twitterapp.features.home.map.MapFragment
 import com.marlonmafra.twitterapp.features.home.timeline.TimelineFragment
 import com.marlonmafra.twitterapp.features.login.LoginActivity
@@ -17,7 +17,7 @@ import javax.inject.Singleton
 interface ApplicationComponent {
     fun inject(twitterApp: TwitterApp)
 
-    fun inject(mainActivity: MainActivity)
+    fun inject(homeActivity: HomeActivity)
 
     fun inject(loginActivity: LoginActivity)
 

@@ -27,7 +27,7 @@ class HomeViewModelTest {
     private lateinit var homeViewModel: HomeViewModel
 
     @MockK
-    private lateinit var interactor: MainInteractor
+    private lateinit var interactor: HomeInteractor
 
     @MockK(relaxed = true)
     lateinit var tweeListObserver: Observer<List<Tweet>>

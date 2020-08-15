@@ -7,7 +7,7 @@ import io.reactivex.Completable
 import io.reactivex.Single
 import javax.inject.Inject
 
-class MainInteractor @Inject constructor(
+class HomeInteractor @Inject constructor(
     private val twitterRepository: TwitterRepository,
     private val authenticationRepository: AuthenticationRepository
 ) {

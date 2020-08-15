@@ -8,7 +8,7 @@ import com.marlonmafra.twitterapp.R
 import com.marlonmafra.twitterapp.TwitterApp
 import com.marlonmafra.twitterapp.extension.changeVisibility
 import com.marlonmafra.twitterapp.features.IntentAction
-import com.marlonmafra.twitterapp.features.home.MainActivity
+import com.marlonmafra.twitterapp.features.home.HomeActivity
 import com.marlonmafra.twitterapp.features.login.LoginActivity
 import kotlinx.android.synthetic.main.activity_splash.*
 import javax.inject.Inject
@@ -34,7 +34,7 @@ class SplashActivity : AppCompatActivity() {
             val intent = if (it == IntentAction.Login) {
                 LoginActivity.createInstance(this)
             } else {
-                MainActivity.createInstance(this)
+                HomeActivity.createInstance(this)
             }
             startActivity(intent)
         })

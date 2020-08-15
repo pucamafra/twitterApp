@@ -13,7 +13,7 @@ import com.marlonmafra.twitterapp.R
 import com.marlonmafra.twitterapp.TwitterApp
 import com.marlonmafra.twitterapp.extension.changeVisibility
 import com.marlonmafra.twitterapp.features.IntentAction
-import com.marlonmafra.twitterapp.features.home.MainActivity
+import com.marlonmafra.twitterapp.features.home.HomeActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.loading_progress_bar.*
 import javax.inject.Inject
@@ -61,7 +61,7 @@ class LoginActivity : AppCompatActivity() {
 
         viewModel.intentAction.observe(this, Observer {
             if (it == IntentAction.Home) {
-                startActivity(MainActivity.createInstance(this))
+                startActivity(HomeActivity.createInstance(this))
             }
         })
     }

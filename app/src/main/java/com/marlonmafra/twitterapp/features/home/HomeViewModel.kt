@@ -12,7 +12,7 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(
-    private val interactor: MainInteractor
+    private val interactor: HomeInteractor
 ) : BaseViewModel() {
 
     val userProfileClicked = MutableLiveData<User>()

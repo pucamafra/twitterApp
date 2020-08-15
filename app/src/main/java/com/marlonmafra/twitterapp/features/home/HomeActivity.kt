@@ -25,10 +25,10 @@ import kotlinx.android.synthetic.main.toolbar.toolbar
 import org.jetbrains.annotations.TestOnly
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity() {
 
     companion object {
-        fun createInstance(context: Context): Intent = Intent(context, MainActivity::class.java)
+        fun createInstance(context: Context): Intent = Intent(context, HomeActivity::class.java)
     }
 
     @Inject

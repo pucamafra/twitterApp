@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="@dimen/default_padding_margin_x"
-    tools:context=".features.home.MainActivity">
+    android:paddingBottom="@dimen/default_padding_margin_x">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/userPicture"
@@ -24,13 +23,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/default_padding_margin"
-        app:layout_constraintStart_toEndOf="@+id/username"
-        app:layout_constraintTop_toTopOf="@+id/username"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/default_padding_margin_x"
         android:ellipsize="end"
         android:lines="1"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
-        android:layout_marginEnd="@dimen/default_padding_margin_x"
+        app:layout_constraintStart_toEndOf="@+id/username"
+        app:layout_constraintTop_toTopOf="@+id/username"
         tools:text=" @thisischuck" />
 
     <com.google.android.material.textview.MaterialTextView

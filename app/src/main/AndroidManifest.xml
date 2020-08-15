@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.marlonmafra.twitterapp">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".TwitterApp"
         android:allowBackup="true"
@@ -36,7 +38,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".features.home.MainActivity"
+            android:name=".features.home.HomeActivity"
             android:label="@string/home_title" />
         <activity
             android:name=".features.profile.ProfileActivity"
@@ -46,7 +48,5 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
     </application>
-
-    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

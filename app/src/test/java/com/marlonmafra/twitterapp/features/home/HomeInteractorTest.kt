@@ -13,10 +13,10 @@ import io.reactivex.observers.TestObserver
 import org.junit.Before
 import org.junit.Test
 
-class MainInteractorTest {
+class HomeInteractorTest {
 
     @InjectMockKs
-    private lateinit var interactor: MainInteractor
+    private lateinit var interactor: HomeInteractor
 
     @MockK
     private lateinit var twitterRepository: TwitterRepository
